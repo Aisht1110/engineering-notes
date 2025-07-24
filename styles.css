@@ -1,10 +1,129 @@
-```
+/* Combined CSS */
+
+/* Body and base styles */
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif; /* updated font-family */
+    background-color: #f4f4f4; /* updated background color */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
+
+/* Container and typography from previous CSS */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.subtitle {
+    margin-bottom: 18px;
+    font-weight: 600;
+    color: #37474f;
+}
+
+.details {
+    font-weight: 400;
+    color: #888;
+    font-size: 15px;
+}
+
+/* Card styles */
+.card {
+    background: #f8f9fa;
+    border-radius: 7px;
+    box-shadow: 0 2px 10px rgba(80,80,80,0.05);
+    padding: 30px 25px 32px 25px;
+}
+
+.card-header {
+    font-size: 20px;
+    color: #232f34;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 9px;
+}
+
+/* Departments grid */
+.departments-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 10px;
+}
+
+.dept-box {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(40,80,100,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 10px 22px 10px;
+    text-decoration: none;
+    transition: box-shadow 0.2s;
+    min-height: 170px;
+}
+.dept-box:hover {
+    box-shadow: 0 6px 24px rgba(40,80,100,0.1);
+    transform: translateY(-2px);
+}
+
+/* Icons */
+.icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 54px;
+    color: #fff;
+}
+
+.civil { background: #a8ce5a;  }
+.civil::before { content: "🧱"; font-size: 46px; }
+
+.electrical { background: #11bba3; }
+.electrical::before { content: "🔌"; font-size: 46px; }
+
+.mechanical { background: #88d2aa; }
+.mechanical::before { content: "🤖"; font-size: 46px; }
+
+.electronics { background: #26e6c6; }
+.electronics::before { content: "💾"; font-size: 48px; }
+
+.computer { background: #a6c86c; }
+.computer::before { content: "💻"; font-size: 46px; }
+
+.it { 
+    border: 3px solid #00a2e8;
+    background: #fff;
+    color: #00a2e8;
+}
+.it::before { content: "💻"; font-size: 46px; color: #00a2e8; }
+
+.dept-name {
+    margin-top: 9px;
+    color: #393e46;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+/* Responsive grid */
+@media (max-width: 800px) {
+    .departments-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 500px) {
+    .departments-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* New CSS from user for header, nav, main, subject-card, footer */
 
 header {
     background-color: #1e3a8a;
@@ -49,4 +168,3 @@ footer {
     bottom: 0;
     width: 100%;
 }
-```
