@@ -1,45 +1,103 @@
-```
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering Notes Hub</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Engineering Notes Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@400&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body>
-    <header>
-        <h1>Engineering Notes Hub</h1>
-        <nav>
-            <ul>
-                <li><a href="#cs">Computer Science</a></li>
-                <li><a href="#mechanical">Mechanical</a></li>
-                <li><a href="#civil">Civil</a></li>
-                <li><a href="#ece">ECE</a></li>
-                <li><a href="#chemical">Chemical</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Engineering Notes Hub</h1>
+    <nav>
+      <ul>
+        <li><a href="#computer">Computer Science</a></li>
+        <li><a href="#mechanical">Mechanical</a></li>
+        <li><a href="#civil">Civil</a></li>
+        <li><a href="#electronics">ECE</a></li>
+        <li><a href="#chemical">Chemical</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <section id="cs">
-            <h2>Computer Science</h2>
-            <div class="subject-card">
-                <h3>Algorithms</h3>
-                <p>Complexity: ★★★</p>
-                <button>View Notes</button>
-            </div>
-            <!-- Add more subjects as needed -->
-        </section>
-        <!-- Add more branches as needed -->
-    </main>
+  <main>
+    <div class="container">
+      <h2 class="subtitle">
+        Engineering Lecture Notes and Online Study Material
+        <span class="details">- Engineering Courses - Online Study material and Lecture notes</span>
+      </h2>
 
-    <footer>
-        <p>&copy; 2023 Engineering Notes Hub</p>
-    </footer>
+      <div class="card" id="departments">
+        <div class="card-header">Engineering Departments</div>
+        <div class="departments-grid">
+          <a class="dept-box" href="#civil" id="civil">
+            <div class="icon civil"></div>
+            <span class="dept-name">Civil</span>
+          </a>
+          <a class="dept-box" href="#electrical" id="electrical">
+            <div class="icon electrical"></div>
+            <span class="dept-name">Electrical</span>
+          </a>
+          <a class="dept-box" href="#mechanical" id="mechanical">
+            <div class="icon mechanical"></div>
+            <span class="dept-name">Mechanical</span>
+          </a>
+          <a class="dept-box" href="#electronics" id="electronics">
+            <div class="icon electronics"></div>
+            <span class="dept-name">Electronics</span>
+          </a>
+          <a class="dept-box" href="#computer" id="computer">
+            <div class="icon computer"></div>
+            <span class="dept-name">Computer Science</span>
+          </a>
+          <a class="dept-box" href="#it" id="it">
+            <div class="icon it"></div>
+            <span class="dept-name">IT</span>
+          </a>
+        </div>
+      </div>
 
-    <script src="script.js"></script>
+      <!-- Example Sections for Branches and Subjects -->
+      <section id="computer">
+        <h2>Computer Science</h2>
+        <div class="subject-card">
+          <h3>Algorithms</h3>
+          <p>Complexity: ★★★</p>
+          <button>View Notes</button>
+        </div>
+        <!-- Add more subjects as needed -->
+      </section>
+
+      <section id="mechanical">
+        <h2>Mechanical</h2>
+        <!-- Add subjects here -->
+      </section>
+
+      <section id="civil">
+        <h2>Civil</h2>
+        <!-- Add subjects here -->
+      </section>
+
+      <section id="electronics">
+        <h2>Electronics</h2>
+        <!-- Add subjects here -->
+      </section>
+
+      <section id="chemical">
+        <h2>Chemical</h2>
+        <!-- Add subjects here -->
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Engineering Notes Hub</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
-```
