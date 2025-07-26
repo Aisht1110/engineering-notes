@@ -14,11 +14,98 @@
     }
     h1 { text-align: center; margin-bottom: 30px; font-family: 'DM Serif Text', serif; }
     ul { padding: 0; list-style: none; }
-    li { margin: 15px 0; background: #f2f3f6; padding: 14px 18px; border-radius: 7px;}
-    a { text-decoration: none; color: #2676c7; font-weight: 500; }
-    a:hover { color: #20507c; }
-    .back-link { display: block; margin-bottom: 15px; color: #666; text-decoration: none; font-size: 1em; }
-    .back-link:hover { color: #104477; }
+    li {
+      margin: 15px 0;
+      background: #f2f3f6;
+      padding: 14px 18px;
+      border-radius: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li a.subject-link {
+      text-decoration: none;
+      color: #2676c7;
+      font-weight: 500;
+      cursor: pointer;
+      flex-grow: 1;
+    }
+    li a.subject-link:hover {
+      color: #20507c;
+      text-decoration: underline;
+    }
+    li a.download-link {
+      margin-left: 15px;
+      color: #4a90e2;
+      font-weight: 400;
+      font-size: 0.9em;
+    }
+    li a.download-link:hover {
+      color: #20507c;
+      text-decoration: underline;
+    }
+    .back-link {
+      display: block;
+      margin-bottom: 15px;
+      color: #666;
+      text-decoration: none;
+      font-size: 1em;
+    }
+    .back-link:hover {
+      color: #104477;
+    }
+
+    /* Modal styles */
+    #pdfPortal {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 80%;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      z-index: 1000;
+      border-radius: 8px;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #pdfPortal header {
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 8px 8px 0 0;
+    }
+    #pdfPortal iframe {
+      width: 100%;
+      height: calc(100% - 42px); /* header height approx 42px */
+      border: none;
+      border-radius: 0 0 8px 8px;
+    }
+    #pdfOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+    #pdfPortal button.close-btn {
+      cursor: pointer;
+      background: #fff;
+      border: none;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    #pdfPortal button.close-btn:hover {
+      background-color: #ddd;
+    }
   </style>
 </head>
 <body>
@@ -26,17 +113,31 @@
     <a href="index.html" class="back-link">&larr; Back to Departments</a>
     <h1>Basic Subjects of Mechanical Engineering</h1>
     <ul>
-      <li><a href="#">ME201 - Thermodynamics</a></li>
-      <li><a href="#">ME202 - Fluid Mechanics</a></li>
-      <li><a href="#">ME203 - Engineering Mechanics</a></li>
-      <li><a href="#">ME204 - Strength of Materials</a></li>
-      <li><a href="#">ME205 - Manufacturing Technology</a></li>
-      <li><a href="#">ME206 - Machine Design</a></li>
-      <li><a href="#">ME207 - Heat Transfer</a></li>
-      <li><a href="#">ME208 - Dynamics of Machinery</a></li>
-      <li><a href="#">ME209 - CAD/CAM</a></li>
-      <li><a href="#">ME210 - Industrial Engineering</a></li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/1eFbTnyTf6WDMnn1oDZjKrgz7oIQOAp3z" class="subject-link" target="_blank">ME201 - Thermodynamics</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/1KTcaEKgPvQi5nZMcYqTBcHiUYqTogGRz" class="subject-link" target="_blank">ME202 - Fluid Mechanics</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/1lRCn-Jct8-XC4Vkl33x_PmdP-RWgLulL" class="subject-link" target="_blank">ME203 - Engineering Mechanics</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/1XODVZYZrmeLPVcwWBDjuhSj_zMMFYFXD" class="subject-link" target="_blank">ME204 - Dynamics of Machinery</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/15IeBiffYgo-ThT4kjWGK607OpFxCs9JQ" class="subject-link" target="_blank">ME205 - Manufacturing Technology</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/1EiDPO4DTogGhm6kOMqNJUA22x4DBCjXU" class="subject-link" target="_blank">ME302 -Heat and Mass Transfer </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/1e592955kqFpRFwq_YZLPnbYrF48OTu4u" class="subject-link" target="_blank">ME303 - Metrology and Quality Control </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/1EFVq4j8AnAMewVylrk_6p5W_2Ii0jymW" class="subject-link" target="_blank">ME201 - Design of Machine Elements </a>
+      </li>
     </ul>
-  </div>
-</body>
-</html>
+</div>
+
+      
