@@ -83,7 +83,7 @@ body {
 }
 
 .civil { background: #a8ce5a;  }
-.civil::before { content: "🧱"; font-size: 46px; }
+.civil::before { content: "👨‍🚒"; font-size: 46px; }
 
 .electrical { background: #11bba3; }
 .electrical::before { content: "🔌"; font-size: 46px; }
@@ -96,6 +96,10 @@ body {
 
 .computer { background: #a6c86c; }
 .computer::before { content: "💻"; font-size: 46px; }
+
+.mme { background: #52175a; }
+.mme::before { content: "⛏️"; font-size: 46px; }
+
 
 .it { 
     border: 3px solid #00a2e8;
