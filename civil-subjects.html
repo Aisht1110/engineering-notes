@@ -6,63 +6,105 @@
   <title>Civil Engineering Subjects</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    body {
-      font-family: 'Open Sans', Arial, sans-serif;
-      background: #f7f7f9;
-      margin: 0;
-      min-height: 100vh;
-    }
+    body { font-family: 'Open Sans', Arial, sans-serif; background: #f7f7f9; }
     .subject-container {
-      max-width: 580px;
-      background: #fff;
-      border-radius: 12px;
-      margin: 40px auto 0 auto;
-      box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+      max-width: 580px; background: #fff; border-radius: 12px;
+      margin: 40px auto 0 auto; box-shadow: 0 2px 12px rgba(44,62,80,0.08);
       padding: 40px 32px 32px 32px;
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-family: 'DM Serif Text', serif;
-      font-size: 2.1em;
-      color: #223;
-    }
-    ul.subject-list {
-      padding: 0;
-      list-style: none;
-    }
-    .subject-list li {
+    h1 { text-align: center; margin-bottom: 30px; font-family: 'DM Serif Text', serif; }
+    ul { padding: 0; list-style: none; }
+    li {
       margin: 15px 0;
       background: #f2f3f6;
       padding: 14px 18px;
       border-radius: 7px;
-      font-size: 1.1em;
-      transition: background 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .subject-list li:hover {
-      background: #e2e5ea;
-    }
-    .subject-list a {
+    li a.subject-link {
       text-decoration: none;
       color: #2676c7;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      transition: color 0.15s;
+      cursor: pointer;
+      flex-grow: 1;
     }
-    .subject-list a:hover {
+    li a.subject-link:hover {
       color: #20507c;
+      text-decoration: underline;
+    }
+    li a.download-link {
+      margin-left: 15px;
+      color: #4a90e2;
+      font-weight: 400;
+      font-size: 0.9em;
+    }
+    li a.download-link:hover {
+      color: #20507c;
+      text-decoration: underline;
     }
     .back-link {
-      display: inline-block;
+      display: block;
       margin-bottom: 15px;
       color: #666;
       text-decoration: none;
       font-size: 1em;
-      padding-bottom: 1px;
-      border-bottom: 1px dotted #aaa;
     }
     .back-link:hover {
       color: #104477;
+    }
+
+    /* Modal styles (kept for consistency, though not used by default in this specific list) */
+    #pdfPortal {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 80%;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      z-index: 1000;
+      border-radius: 8px;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #pdfPortal header {
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 8px 8px 0 0;
+    }
+    #pdfPortal iframe {
+      width: 100%;
+      height: calc(100% - 42px); /* header height approx 42px */
+      border: none;
+      border-radius: 0 0 8px 8px;
+    }
+    #pdfOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+    #pdfPortal button.close-btn {
+      cursor: pointer;
+      background: #fff;
+      border: none;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    #pdfPortal button.close-btn:hover {
+      background-color: #ddd;
     }
   </style>
 </head>
@@ -70,17 +112,55 @@
   <div class="subject-container">
     <a href="index.html" class="back-link">&larr; Back to Departments</a>
     <h1>Basic Subjects of Civil Engineering</h1>
-    <ul class="subject-list">
-      <li><a href="#" title="Open Structural Engineering">CE201 - Structural Engineering</a></li>
-      <li><a href="#" title="Open Geotechnical Engineering">CE202 - Geotechnical Engineering</a></li>
-      <li><a href="#" title="Open Transportation Engineering">CE203 - Transportation Engineering</a></li>
-      <li><a href="#" title="Open Environmental Engineering">CE204 - Environmental Engineering</a></li>
-      <li><a href="#" title="Open Water Resources Engineering">CE205 - Water Resources Engineering</a></li>
-      <li><a href="#" title="Open Construction Materials & Technology">CE206 - Construction Materials & Technology</a></li>
-      <li><a href="#" title="Open Surveying">CE207 - Surveying</a></li>
-      <li><a href="#" title="Open Fluid Mechanics">CE208 - Fluid Mechanics</a></li>
-      <li><a href="#" title="Open Strength of Materials">CE209 - Strength of Materials</a></li>
-      <li><a href="#" title="Open Project Management and Construction Planning">CE210 - Project Management and Construction Planning</a></li>
+    <ul>
+      <li style="background-color: #dbea7d;">
+        <a href="https://drive.google.com/drive/folders/YOUR_CIVIL_ENGINEERING_BOOKS_FOLDER_LINK" class="subject-link" target="_blank">CIVIL ENGINEERING BOOKS</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_ENGINEERING_MECHANICS_FOLDER_LINK" class="subject-link" target="_blank">Engineering Mechanics / Applied Mechanics</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_STRENGTH_OF_MATERIALS_FOLDER_LINK" class="subject-link" target="_blank">Strength of Materials (Solid Mechanics)</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_FLUID_MECHANICS_FOLDER_LINK" class="subject-link" target="_blank">Fluid Mechanics</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_SURVEYING_FOLDER_LINK" class="subject-link" target="_blank">Surveying</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_BUILDING_MATERIALS_CONSTRUCTION_FOLDER_LINK" class="subject-link" target="_blank">Building Materials and Construction</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_STRUCTURAL_ANALYSIS_FOLDER_LINK" class="subject-link" target="_blank">Structural Analysis</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_CONCRETE_TECHNOLOGY_FOLDER_LINK" class="subject-link" target="_blank">Concrete Technology</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_GEOTECHNICAL_ENGINEERING_FOLDER_LINK" class="subject-link" target="_blank">Geotechnical Engineering (Soil Mechanics & Foundation Engineering)</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_TRANSPORTATION_ENGINEERING_FOLDER_LINK" class="subject-link" target="_blank">Transportation Engineering</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_ENVIRONMENTAL_ENGINEERING_FOLDER_LINK" class="subject-link" target="_blank">Environmental Engineering</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_WATER_RESOURCES_ENGINEERING_FOLDER_LINK" class="subject-link" target="_blank">Water Resources Engineering (Hydrology & Irrigation)</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_DESIGN_RC_STRUCTURES_FOLDER_LINK" class="subject-link" target="_blank">Design of Reinforced Concrete Structures</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_DESIGN_STEEL_STRUCTURES_FOLDER_LINK" class="subject-link" target="_blank">Design of Steel Structures</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_CONSTRUCTION_MANAGEMENT_FOLDER_LINK" class="subject-link" target="_blank">Construction Management</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_ESTIMATING_COSTING_FOLDER_LINK" class="subject-link" target="_blank">Estimating and Costing</a>
+      </li>
     </ul>
   </div>
 </body>
