@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Metallurgy Subjects</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { font-family: 'Open Sans', Arial, sans-serif; background: #f7f7f9; }
+    .subject-container {
+      max-width: 580px; background: #fff; border-radius: 12px;
+      margin: 40px auto 0 auto; box-shadow: 0 2px 12px rgba(44,62,80,0.08);
+      padding: 40px 32px 32px 32px;
+    }
+    h1 { text-align: center; margin-bottom: 30px; font-family: 'DM Serif Text', serif; }
+    ul { padding: 0; list-style: none; }
+    li {
+      margin: 15px 0;
+      background: #f2f3f6;
+      padding: 14px 18px;
+      border-radius: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li a.subject-link {
+      text-decoration: none;
+      color: #2676c7;
+      font-weight: 500;
+      cursor: pointer;
+      flex-grow: 1;
+    }
+    li a.subject-link:hover {
+      color: #20507c;
+      text-decoration: underline;
+    }
+    li a.download-link {
+      margin-left: 15px;
+      color: #4a90e2;
+      font-weight: 400;
+      font-size: 0.9em;
+    }
+    li a.download-link:hover {
+      color: #20507c;
+      text-decoration: underline;
+    }
+    .back-link {
+      display: block;
+      margin-bottom: 15px;
+      color: #666;
+      text-decoration: none;
+      font-size: 1em;
+    }
+    .back-link:hover {
+      color: #104477;
+    }
+
+    /* Modal styles */
+    #pdfPortal {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 80%;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      z-index: 1000;
+      border-radius: 8px;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #pdfPortal header {
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 8px 8px 0 0;
+    }
+    #pdfPortal iframe {
+      width: 100%;
+      height: calc(100% - 42px); /* header height approx 42px */
+      border: none;
+      border-radius: 0 0 8px 8px;
+    }
+    #pdfOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+    #pdfPortal button.close-btn {
+      cursor: pointer;
+      background: #fff;
+      border: none;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    #pdfPortal button.close-btn:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="subject-container">
+    <a href="index.html" class="back-link">&larr; Back to Departments</a>
+    <h1>Basic Subjects of Metallurgy</h1>
+    <ul>
+      <li style="background-color: #dbea7d;">
+        <a href="https://drive.google.com/drive/folders/YOUR_METALLURGY_BOOKS_FOLDER_LINK" class="subject-link" target="_blank">METALLURGY BOOKS</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_PHYSICAL_METALLURGY_FOLDER_LINK" class="subject-link" target="_blank">Physical Metallurgy</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_EXTRACTIVE_METALLURGY_FOLDER_LINK" class="subject-link" target="_blank">Extractive Metallurgy</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_MECHANICAL_METALLURGY_FOLDER_LINK" class="subject-link" target="_blank">Mechanical Metallurgy</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_THERMODYNAMICS_OF_MATERIALS_FOLDER_LINK" class="subject-link" target="_blank">Thermodynamics of Materials</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_PHASE_DIAGRAMS_FOLDER_LINK" class="subject-link" target="_blank">Phase Diagrams and Transformations</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_HEAT_TREATMENT_FOLDER_LINK" class="subject-link" target="_blank">Heat Treatment of Metals</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_IRON_STEEL_MAKING_FOLDER_LINK" class="subject-link" target="_blank">Iron and Steel Making</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_NON_FERROUS_METALLURGY_FOLDER_LINK" class="subject-link" target="_blank">Non-Ferrous Metallurgy</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_WELDING_JOINING_FOLDER_LINK" class="subject-link" target="_blank">Welding and Joining Technology</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_CORROSION_ENGINEERING_FOLDER_LINK" class="subject-link" target="_blank">Corrosion Engineering</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_MATERIAL_CHARACTERIZATION_FOLDER_LINK" class="subject-link" target="_blank">Material Characterization Techniques</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_METAL_FORMING_PROCESSES_FOLDER_LINK" class="subject-link" target="_blank">Metal Forming Processes</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_POWDER_METALLURGY_FOLDER_LINK" class="subject-link" target="_blank">Powder Metallurgy</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_SURFACE_ENGINEERING_FOLDER_LINK" class="subject-link" target="_blank">Surface Engineering</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_FAILURE_ANALYSIS_FOLDER_LINK" class="subject-link" target="_blank">Failure Analysis and Prevention</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_NANOMATERIALS_FOLDER_LINK" class="subject-link" target="_blank">Nanomaterials and Advanced Materials</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_FOUNDRY_TECHNOLOGY_FOLDER_LINK" class="subject-link" target="_blank">Foundry Technology</a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/drive/folders/YOUR_ENVIRONMENTAL_SAFETY_FOLDER_LINK" class="subject-link" target="_blank">Environmental and Safety Aspects in Metallurgy</a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
