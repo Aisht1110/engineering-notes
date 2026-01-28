@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manufacturing Processes I - Files</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Palette */
+      --primary-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%); /* Slate Theme */
+      --primary-color: #334155;
+      --primary-light: #f1f5f9;
+      --secondary-color: #64748b;
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 10px 20px -5px rgba(0,0,0,0.06);
+      --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      --radius: 16px;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      /* Subtle grid pattern */
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 24px 24px;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      color: #0f172a;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* --- Header Section --- */
+    .course-header {
+      background: var(--primary-gradient);
+      border-radius: var(--radius);
+      padding: 40px;
+      color: white;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative element */
+    .course-header::after {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -40px;
+      width: 220px;
+      height: 220px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .header-content h2 {
+      margin: 0 0 8px 0;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      opacity: 0.8;
+      font-weight: 600;
+    }
+
+    .header-content h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .header-stats {
+      margin-top: 16px;
+      display: flex;
+      gap: 20px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+    
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* --- File Cards List --- */
+    .file-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .file-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+      position: relative;
+    }
+
+    .file-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: #e2e8f0;
+    }
+
+    /* Left Side: Icon + Text */
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Custom PDF Icon */
+    .icon-wrapper {
+      width: 52px;
+      height: 52px;
+      background: #fee2e2;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #ef4444;
+    }
+    
+    /* Variant colors for different types */
+    .icon-wrapper.qp { background: #ffedd5; color: #f97316; } /* Orange */
+    .icon-wrapper.iq { background: #dcfce7; color: #16a34a; } /* Green */
+
+    .icon-wrapper svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+
+    .file-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .file-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .file-meta {
+      font-size: 0.8rem;
+      color: var(--secondary-color);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .badge {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      font-weight: 600;
+      color: #475569;
+      text-transform: uppercase;
+    }
+
+    /* Right Side: Actions */
+    .card-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .btn-view {
+      color: var(--primary-color);
+      background: transparent;
+    }
+    .btn-view:hover { background: #e2e8f0; }
+
+    .btn-download {
+      background: #f1f5f9;
+      color: #334155;
+    }
+    .btn-download:hover {
+      background: #1e293b;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 600px) {
+      body { padding: 20px 15px; }
+      .course-header { padding: 30px; }
+      .file-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 16px; }
+      .card-actions { width: 100%; justify-content: flex-end; }
+      .header-content h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <div class="course-header">
+      <div class="header-content">
+        <h2>ME8351</h2>
+        <h1>Manufacturing Processes I</h1>
+        <div class="header-stats">
+          <div class="stat-item">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            7 Files
+          </div>
+          <div class="stat-item">•</div>
+          <div class="stat-item">Updated Jan 2020</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-grid">
+
+      <div class="file-card">
+        <div class="card-left">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-info">
+            <div class="file-title">Unit 1</div>
+            <div class="file-meta">
+              <span class="badge">Notes</span>
+              <span>MP1(U1).pdf • 10.7 MB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="pdf/MP1/MP1(U1).pdf" class="btn btn-view" title="Preview" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </a>
+          <a href="pdf/MP1/MP1(U1).pdf" class="btn btn-download" title="Download" download>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="card-left">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-info">
+            <div class="file-title">Unit 2</div>
+            <div class="file-meta">
+              <span class="badge">Notes</span>
+              <span>MP1(U2).pdf • 537 KB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="pdf/MP1/MP1(U2).pdf" class="btn btn-view" title="Preview" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </a>
+          <a href="pdf/MP1/MP1(U2).pdf" class="btn btn-download" title="Download" download>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="card-left">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-info">
+            <div class="file-title">Unit 3</div>
+            <div class="file-meta">
+              <span class="badge">Notes</span>
+              <span>MP1(U3).pdf • 347 KB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="pdf/MP1/MP1(U3).pdf" class="btn btn-view" title="Preview" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </a>
+          <a href="pdf/MP1/MP1(U3).pdf" class="btn btn-download" title="Download" download>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="card-left">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-info">
+            <div class="file-title">Unit 4</div>
+            <div class="file-meta">
+              <span class="badge">Notes</span>
+              <span>MP1(U4).pdf • 304 KB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="pdf/MP1/MP1(U4).pdf" class="btn btn-view" title="Preview" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </a>
+          <a href="pdf/MP1/MP1(U4).pdf" class="btn btn-download" title="Download" download>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="card-left">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-info">
+            <div class="file-title">Unit 5</div>
+            <div class="file-meta">
+              <span class="badge">Notes</span>
+              <span>MP1(U5).pdf • 307 KB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="pdf/MP1/MP1(U5).pdf" class="btn btn-view" title="Preview" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </a>
+          <a href="pdf/MP1/MP1(U5).pdf" class="btn btn-download" title="Download" download>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="card-left">
+          <div class="icon-wrapper iq">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          </div>
+          <div class="file-info">
+            <div class="file-title">Important Questions</div>
+            <div class="file-meta">
+              <span class="badge" style="background: #dcfce7; color: #166534;">Study</span>
+              <span>MP1(IQ).pdf • 160 KB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="pdf/MP1/MP1(IQ).pdf" class="btn btn-view" title="Preview" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </a>
+          <a href="pdf/MP1/MP1(IQ).pdf" class="btn btn-download" title="Download" download>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="card-left">
+          <div class="icon-wrapper qp">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          </div>
+          <div class="file-info">
+            <div class="file-title">Previous Year Question Paper</div>
+            <div class="file-meta">
+              <span class="badge" style="background: #ffedd5; color: #9a3412;">Exam</span>
+              <span>MP1(QP).pdf • 160 KB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="pdf/MP1/MP1(QP).pdf" class="btn btn-view" title="Preview" target="_blank">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </a>
+          <a href="pdf/MP1/MP1(QP).pdf" class="btn btn-download" title="Download" download>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

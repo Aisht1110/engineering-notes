@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thermodynamics (ME201) - Files</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-blue: #1a73e8;
+      --bg-color: #f3f6fc;
+      --card-bg: #ffffff;
+      --text-main: #202124;
+      --text-subtle: #5f6368;
+      --hover-bg: #f5f5f5;
+      --border-color: #dadce0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    /* --- Container as a "Card" --- */
+    .file-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 16px; /* Rounded corners */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Soft shadow */
+      overflow: hidden; /* Clips the child elements to the rounded corners */
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    /* --- Navigation / Header --- */
+    .top-bar {
+      padding: 25px 30px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #fff;
+    }
+
+    .back-btn {
+      color: var(--text-subtle);
+      text-decoration: none;
+      font-size: 0.9em;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s;
+      width: fit-content;
+    }
+    .back-btn:hover { color: var(--primary-blue); }
+
+    .header-title {
+      font-size: 1.5em;
+      font-weight: 600;
+      margin: 0;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* --- List Header --- */
+    .list-header {
+      display: flex;
+      padding: 12px 30px;
+      background-color: #fafafa;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-subtle);
+      font-size: 0.85em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .col-name { flex: 1; } 
+    .col-actions { width: 180px; text-align: right; }
+
+    /* --- File Rows --- */
+    .file-list {
+      padding: 10px 0;
+    }
+
+    .file-row {
+      display: flex;
+      align-items: center;
+      padding: 15px 30px;
+      border-bottom: 1px solid transparent; /* Invisible border for spacing */
+      transition: background-color 0.15s ease;
+      cursor: pointer;
+    }
+
+    .file-row:hover {
+      background-color: #f8faff; /* Very subtle blue tint on hover */
+    }
+    
+    .file-row:last-child {
+      margin-bottom: 10px;
+    }
+
+    /* Icon & Name */
+    .file-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      overflow: hidden;
+    }
+
+    .pdf-icon-bg {
+      width: 36px;
+      height: 36px;
+      background-color: #fce8e6; /* Light red background */
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pdf-icon-svg {
+      width: 20px;
+      height: 20px;
+      fill: #ea4335; /* Google Red */
+    }
+
+    .file-details {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .file-name {
+      font-size: 1em;
+      font-weight: 600;
+      color: #3c4043;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .file-meta {
+      font-size: 0.8em;
+      color: #9aa0a6;
+      margin-top: 2px;
+    }
+
+    /* --- Action Buttons --- */
+    .action-group {
+      width: 180px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      opacity: 0.7; /* Slightly faded normally */
+      transition: opacity 0.2s;
+    }
+
+    .file-row:hover .action-group { opacity: 1; }
+
+    .btn-action {
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    /* View Button Style */
+    .btn-view {
+      color: var(--primary-blue);
+      background-color: #e8f0fe;
+    }
+    .btn-view:hover {
+      background-color: #d2e3fc;
+    }
+
+    /* Download Button Style */
+    .btn-download {
+      color: #3c4043;
+      background-color: #f1f3f4;
+    }
+    .btn-download:hover {
+      background-color: #e8eaed;
+      color: #202124;
+    }
+    
+    /* Icons inside buttons */
+    .btn-action svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      .top-bar { padding: 20px; }
+      .list-header { display: none; } /* Hide header on mobile */
+      .file-row { 
+        padding: 15px 20px; 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 15px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .action-group { width: 100%; justify-content: flex-start; opacity: 1; }
+      .btn-action { flex: 1; justify-content: center; padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="file-card">
+    
+    <div class="top-bar">
+      <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="margin-right:4px;"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Departments
+      </a>
+      <h1 class="header-title">
+        <span style="color: #ea4335;">ME201</span>&nbsp;Thermodynamics
+      </h1>
+    </div>
+
+    <div class="list-header">
+      <div class="col-name">File Name</div>
+      <div class="col-actions">Options</div>
+    </div>
+
+    <div class="file-list">
+
+      <div class="file-row">
+        <div class="file-info">
+          <div class="pdf-icon-bg">
+            <svg class="pdf-icon-svg" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-details">
+            <span class="file-name">Thermodynamics_Unit_1.pdf</span>
+            <span class="file-meta">1.6 MB • Updated Jan 19, 2020</span>
+          </div>
+        </div>
+        <div class="action-group">
+          <a href="pdf/Td/ATD(U1).pdf" target="_blank" class="btn-action btn-view">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            View
+          </a>
+          <a href="pdf/Td/ATD(U1).pdf" download class="btn-action btn-download">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Save
+          </a>
+        </div>
+      </div>
+
+      <div class="file-row">
+        <div class="file-info">
+          <div class="pdf-icon-bg">
+            <svg class="pdf-icon-svg" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-details">
+            <span class="file-name">Thermodynamics_Unit_2.pdf</span>
+            <span class="file-meta">1.3 MB • Updated Jan 19, 2020</span>
+          </div>
+        </div>
+        <div class="action-group">
+          <a href="pdf/Td/ATD(U2).pdf" target="_blank" class="btn-action btn-view">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            View
+          </a>
+          <a href="pdf/Td/ATD(U2).pdf" download class="btn-action btn-download">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Save
+          </a>
+        </div>
+      </div>
+
+      <div class="file-row">
+        <div class="file-info">
+          <div class="pdf-icon-bg">
+            <svg class="pdf-icon-svg" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-details">
+            <span class="file-name">Thermodynamics_Unit_3.pdf</span>
+            <span class="file-meta">914 KB • Updated Jan 19, 2020</span>
+          </div>
+        </div>
+        <div class="action-group">
+          <a href="pdf/Td/ATD(U3).pdf" target="_blank" class="btn-action btn-view">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            View
+          </a>
+          <a href="#" download class="btn-action btn-download">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Save
+          </a>
+        </div>
+      </div>
+
+      <div class="file-row">
+        <div class="file-info">
+          <div class="pdf-icon-bg">
+            <svg class="pdf-icon-svg" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-details">
+            <span class="file-name">Thermodynamics_Unit_4.pdf</span>
+            <span class="file-meta">605 KB • Updated Jan 19, 2020</span>
+          </div>
+        </div>
+        <div class="action-group">
+          <a href="pdf/Td/ATD(U4).pdf" target="_blank" class="btn-action btn-view">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            View
+          </a>
+          <a href="pdf/Td/ATD(U4).pdf" download class="btn-action btn-download">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Save
+          </a>
+        </div>
+      </div>
+
+      <div class="file-row">
+        <div class="file-info">
+          <div class="pdf-icon-bg">
+            <svg class="pdf-icon-svg" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-details">
+            <span class="file-name">Thermodynamics_Unit_5.pdf</span>
+            <span class="file-meta">730 KB • Updated Jan 19, 2020</span>
+          </div>
+        </div>
+        <div class="action-group">
+          <a href="pdf/Td/ATD(U5).pdf" target="_blank" class="btn-action btn-view">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            View
+          </a>
+          <a href="pdf/Td/ATD(U5).pdf" download class="btn-action btn-download">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Save
+          </a>
+        </div>
+      </div>
+
+      <div class="file-row">
+        <div class="file-info">
+          <div class="pdf-icon-bg">
+            <svg class="pdf-icon-svg" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-details">
+            <span class="file-name">Thermodynamics_QP_2020.pdf</span>
+            <span class="file-meta">160 KB • Updated Jan 15, 2020</span>
+          </div>
+        </div>
+        <div class="action-group">
+          <a href="pdf/Td/ATD(IQ)" target="_blank" class="btn-action btn-view">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            View
+          </a>
+          <a href="pdf/Td/ATD(IQ)" download class="btn-action btn-download">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Save
+          </a>
+        </div>
+      </div>
+
+      <div class="file-row">
+        <div class="file-info">
+          <div class="pdf-icon-bg">
+            <svg class="pdf-icon-svg" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+          </div>
+          <div class="file-details">
+            <span class="file-name">Thermodynamics_Imp_Questions.pdf</span>
+            <span class="file-meta">3.3 MB • Updated Jan 19, 2020</span>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

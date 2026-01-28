@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mathematics II - Files</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #0f172a, #334155);
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      --secondary: #64748b;
+      --shadow-sm: 0 2px 6px rgba(0,0,0,0.05);
+      --shadow-hover: 0 18px 30px rgba(0,0,0,0.12);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-body);
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 24px 24px;
+      margin: 0;
+      padding: 40px 20px;
+      color: #0f172a;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .course-header {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-header::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      top: -80px;
+      right: -60px;
+    }
+
+    .course-header h2 {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      opacity: 0.8;
+      margin: 0 0 6px;
+    }
+
+    .course-header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .header-meta {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+      display: flex;
+      gap: 16px;
+    }
+
+    .file-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .file-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+      transition: 0.3s ease;
+    }
+
+    .file-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon.notes { background: #fee2e2; color: #ef4444; }
+    .icon.iq { background: #dcfce7; color: #16a34a; }
+    .icon.qp { background: #ffedd5; color: #f97316; }
+
+    .icon svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+
+    .file-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .file-meta {
+      font-size: 0.8rem;
+      color: var(--secondary);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #334155;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-download:hover {
+      background: #0f172a;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      .file-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="course-header">
+    <h2>M2</h2>
+    <h1>Mathematics II</h1>
+    <div class="header-meta">
+      <div>7 Files</div>
+      <div>•</div>
+      <div>Updated Dec 2019</div>
+    </div>
+  </div>
+
+  <div class="file-grid">
+
+    <!-- UNIT 1 -->
+    <div class="file-card">
+      <div class="card-left">
+        <div class="icon notes">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6v20h12V8z"/></svg>
+        </div>
+        <div>
+          <div class="file-title">Unit 1</div>
+          <div class="file-meta">
+            <span class="badge">Notes</span>
+            <span>M2(U1).pdf • 487 KB</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="pdf/M2/M2(U1).pdf" class="btn" target="_blank">👁</a>
+        <a href="pdf/M2/M2(U1).pdf" class="btn btn-download" download>⬇</a>
+      </div>
+    </div>
+
+    <!-- UNIT 2 -->
+    <div class="file-card">
+      <div class="card-left">
+        <div class="icon notes">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6v20h12V8z"/></svg>
+        </div>
+        <div>
+          <div class="file-title">Unit 2</div>
+          <div class="file-meta">
+            <span class="badge">Notes</span>
+            <span>M2(U2).pdf • 539 KB</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="pdf/M2/M2(U2).pdf" class="btn" target="_blank">👁</a>
+        <a href="pdf/M2/M2(U2).pdf" class="btn btn-download" download>⬇</a>
+      </div>
+    </div>
+
+    <!-- UNIT 3 -->
+    <div class="file-card">
+      <div class="card-left">
+        <div class="icon notes">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6v20h12V8z"/></svg>
+        </div>
+        <div>
+          <div class="file-title">Unit 3</div>
+          <div class="file-meta">
+            <span class="badge">Notes</span>
+            <span>M2(U3).pdf • 926 KB</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="pdf/M2/M2(U3).pdf" class="btn" target="_blank">👁</a>
+        <a href="pdf/M2/M2(U3).pdf" class="btn btn-download" download>⬇</a>
+      </div>
+    </div>
+
+    <!-- UNIT 4 -->
+    <div class="file-card">
+      <div class="card-left">
+        <div class="icon notes">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6v20h12V8z"/></svg>
+        </div>
+        <div>
+          <div class="file-title">Unit 4</div>
+          <div class="file-meta">
+            <span class="badge">Notes</span>
+            <span>M2(U4).pdf • 877 KB</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="pdf/M2/M2(U4).pdf" class="btn" target="_blank">👁</a>
+        <a href="pdf/M2/M2(U4).pdf" class="btn btn-download" download>⬇</a>
+      </div>
+    </div>
+
+    <!-- UNIT 5 -->
+    <div class="file-card">
+      <div class="card-left">
+        <div class="icon notes">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6v20h12V8z"/></svg>
+        </div>
+        <div>
+          <div class="file-title">Unit 5</div>
+          <div class="file-meta">
+            <span class="badge">Notes</span>
+            <span>M2(U5).pdf • 531 KB</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="pdf/M2/M2(U5).pdf" class="btn" target="_blank">👁</a>
+        <a href="pdf/M2/M2(U5).pdf" class="btn btn-download" download>⬇</a>
+      </div>
+    </div>
+
+    <!-- IMPORTANT QUESTIONS -->
+    <div class="file-card">
+      <div class="card-left">
+        <div class="icon iq">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5v18h14z"/></svg>
+        </div>
+        <div>
+          <div class="file-title">Important Questions</div>
+          <div class="file-meta">
+            <span class="badge">Study</span>
+            <span>M2(IQ).pdf • 1.6 MB</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="pdf/M2/M2(IQ).pdf" class="btn" target="_blank">👁</a>
+        <a href="pdf/M2/M2(IQ).pdf" class="btn btn-download" download>⬇</a>
+      </div>
+    </div>
+
+    <!-- QUESTION PAPER -->
+    <div class="file-card">
+      <div class="card-left">
+        <div class="icon qp">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6v20h12V8z"/></svg>
+        </div>
+        <div>
+          <div class="file-title">Previous Year Question Paper</div>
+          <div class="file-meta">
+            <span class="badge">Exam</span>
+            <span>M2(QP).pdf • 150 KB</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="pdf/M2/M2(QP).pdf" class="btn" target="_blank">👁</a>
+        <a href="pdf/M2/M2(QP).pdf" class="btn btn-download" download>⬇</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

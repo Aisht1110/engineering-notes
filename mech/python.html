@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Programming – Notes</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #020617;
+      --glass: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.15);
+      --text-main: #f8fafc;
+      --text-muted: #cbd5f5;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.15);
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background:
+        radial-gradient(circle at top left, #0f172a, #020617 60%);
+      color: var(--text-main);
+      padding: 40px 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      border-radius: var(--radius-xl);
+      padding: 46px 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+      margin-bottom: 40px;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      top: -120px;
+      right: -90px;
+    }
+
+    .header h2 {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      opacity: 0.9;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+    }
+
+    .header h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .header-meta {
+      margin-top: 18px;
+      display: flex;
+      gap: 20px;
+      font-size: 0.95rem;
+      opacity: 0.95;
+      flex-wrap: wrap;
+    }
+
+    /* ===== FILE CARD ===== */
+    .file-card {
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      transition: 0.35s ease;
+    }
+
+    .file-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 35px 70px rgba(0,0,0,0.6);
+      border-color: var(--accent);
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    /* ===== ICON ===== */
+    .icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #facc15, #f97316);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+    }
+
+    .icon svg {
+      width: 34px;
+      height: 34px;
+      fill: white;
+    }
+
+    .file-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .file-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    /* ===== ACTIONS ===== */
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: white;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: 0.25s ease;
+    }
+
+    .btn:hover {
+      background: white;
+      color: #020617;
+      transform: scale(1.08);
+    }
+
+    .btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 640px) {
+      .header {
+        padding: 34px 26px;
+      }
+      .header h1 {
+        font-size: 2.1rem;
+      }
+      .file-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h2>Computer Science</h2>
+      <h1>Python Programming</h1>
+      <div class="header-meta">
+        <div>📄 1 File</div>
+        <div>•</div>
+        <div>Updated Aug 2025</div>
+        <div>•</div>
+        <div>Size 7.7 MB</div>
+      </div>
+    </div>
+
+    <!-- FILE CARD -->
+    <div class="file-card">
+      <div class="left">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 2v6h6"/>
+          </svg>
+        </div>
+        <div>
+          <div class="file-title">Python Programming Notes</div>
+          <div class="file-meta">
+            <span class="badge">PDF</span>
+            <span>PYTHON PROGRAMMING.pdf</span>
+            <span>7.7 MB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <!-- VIEW -->
+        <a href="pdf/Python Notes/PYTHON PROGRAMMING.pdf" class="btn" target="_blank" title="Preview">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+          </svg>
+        </a>
+
+        <!-- DOWNLOAD -->
+        <a href="pdf/Python Notes/PYTHON PROGRAMMING.pdf" class="btn" download title="Download">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 16l4-5h-3V4h-2v7H8z"/>
+            <path d="M5 20h14v-2H5z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
