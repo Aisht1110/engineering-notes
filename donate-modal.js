@@ -6,14 +6,10 @@
     const MODAL_COOLDOWN_DAYS = 3; // Don't show again for 3 days after dismissal
 
     function shouldShowModal() {
-        const last = localStorage.getItem(MODAL_KEY);
-        if (!last) return true;
-        const daysSince = (Date.now() - parseInt(last, 10)) / (1000 * 60 * 60 * 24);
-        return daysSince >= MODAL_COOLDOWN_DAYS;
+        return true; // Show every time user clicks download
     }
 
     function dismissModal() {
-        localStorage.setItem(MODAL_KEY, Date.now().toString());
         document.getElementById('donateModal').style.display = 'none';
     }
 
@@ -30,9 +26,9 @@
             <button id="modalClose" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.4rem; cursor:pointer; color:#94a3b8; line-height:1;">&times;</button>
             <div style="width:56px; height:56px; background:#eff6ff; border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:1.6rem;">❤️</div>
             <h3 style="font-family:'DM Serif Text',serif; font-size:1.6rem; color:#0f172a; margin:0 0 10px;">Enjoying Free Notes?</h3>
-            <p style="font-size:0.95rem; color:#64748b; line-height:1.7; margin:0 0 28px;">BTechBook is 100% free & ad-free. If our notes help you, a small contribution keeps the servers running for everyone!</p>
+            <p style="font-size:0.95rem; color:#64748b; line-height:1.7; margin:0 0 28px;">BTechBook is 100% free & ad-free. If our resources help you crack your exams, a small contribution keeps the servers running for everyone!</p>
             <a id="modalDonate" href="${donateUrl}" style="display:block; width:100%; padding:14px; background:#2563eb; color:#fff; font-weight:700; font-size:1.05rem; border-radius:12px; text-decoration:none; margin-bottom:12px; transition:background 0.2s;">Support BTechBook ❤️</a>
-            <button id="modalContinue" style="display:block; width:100%; padding:14px; background:#f1f5f9; color:#334155; font-weight:600; font-size:1rem; border-radius:12px; border:none; cursor:pointer; transition:background 0.2s;">Continue to Notes &rarr;</button>
+            <button id="modalContinue" style="display:block; width:100%; padding:14px; background:#f1f5f9; color:#334155; font-weight:600; font-size:1rem; border-radius:12px; border:none; cursor:pointer; transition:background 0.2s;">Continue to File &rarr;</button>
         </div>
     </div>
     <style>
@@ -47,8 +43,8 @@
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
     // Add interceptors
-    // We target both the branch cards (.dept-box) and the individual subject links (.subject-item a)
-    const linksToIntercept = document.querySelectorAll('.dept-box, .subject-item a, .subject-card a');
+    // Target the download/preview buttons and Google Drive links
+    const linksToIntercept = document.querySelectorAll('.btn-download, .btn-view, a[href*="drive.google.com"], a[download]');
 
     linksToIntercept.forEach(function(card) {
         card.addEventListener('click', function(e) {
@@ -56,28 +52,39 @@
 
             e.preventDefault();
             const targetUrl = card.getAttribute('href') || card.parentElement.getAttribute('href');
+            const targetAttr = card.getAttribute('target');
+            const isDownload = card.hasAttribute('download');
             
             if(!targetUrl || targetUrl === '#' || targetUrl.startsWith('javascript:')) {
-                // If it's a broken or JS link, don't intercept
                 return;
             }
 
             const modal = document.getElementById('donateModal');
             modal.style.display = 'flex';
 
-            // Continue button
-            document.getElementById('modalContinue').onclick = function() {
+            const proceedWithLink = function() {
                 dismissModal();
-                window.location.href = targetUrl;
+                if (targetAttr === '_blank') {
+                    window.open(targetUrl, '_blank');
+                } else if (isDownload) {
+                    const link = document.createElement('a');
+                    link.href = targetUrl;
+                    link.download = card.getAttribute('download') || '';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    window.location.href = targetUrl;
+                }
             };
+
+            // Continue button
+            document.getElementById('modalContinue').onclick = proceedWithLink;
 
             // Close button
-            document.getElementById('modalClose').onclick = function() {
-                dismissModal();
-                window.location.href = targetUrl;
-            };
+            document.getElementById('modalClose').onclick = proceedWithLink;
 
-            // Donate button clicks (also dismiss the modal so they aren't bugged again immediately)
+            // Donate button clicks (dismiss the modal)
             document.getElementById('modalDonate').onclick = function() {
                 dismissModal();
             };
@@ -85,8 +92,7 @@
             // Click outside modal
             modal.onclick = function(ev) {
                 if (ev.target === modal) {
-                    dismissModal();
-                    window.location.href = targetUrl;
+                    proceedWithLink();
                 }
             };
         });
