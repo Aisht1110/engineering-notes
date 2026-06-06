@@ -1,3 +1,14 @@
+# BTechBook.in Robots.txt
+# Allow all search engines to crawl the entire site
+
 User-agent: *
 Allow: /
-Sitemap: https://techbooks00001.netlify.app/sitemap.xml
+
+# Block utility/viewer pages from indexing
+Disallow: /pdf_viewer.html
+Disallow: /viewer.html
+Disallow: /maintainance.html
+Disallow: /comingsoon.html
+
+# Sitemap location
+Sitemap: https://btechbook.in/sitemap.xml

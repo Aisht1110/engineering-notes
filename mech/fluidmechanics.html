@@ -1,377 +1,1271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fluid Mechanics - Resources</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --primary-color: #4f46e5; /* Indigo */
-      --primary-light: #e0e7ff;
-      --secondary-color: #64748b;
-      --bg-body: #f3f4f6;
-      --card-bg: #ffffff;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-      --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-      --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-      --radius: 16px;
-    }
-
-    body {
-      background-color: var(--bg-body);
-      /* Subtle background pattern */
-      background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-      background-size: 24px 24px;
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 40px 20px;
-      color: #1e293b;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    /* --- Header Section --- */
-    .course-header {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      border-radius: var(--radius);
-      padding: 40px;
-      color: white;
-      box-shadow: var(--shadow-md);
-      margin-bottom: 30px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Decorative circle in header */
-    .course-header::after {
-      content: "";
-      position: absolute;
-      top: -50px;
-      right: -50px;
-      width: 200px;
-      height: 200px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-    }
-
-    .header-content h2 {
-      margin: 0 0 8px 0;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      opacity: 0.8;
-      font-weight: 600;
-    }
-
-    .header-content h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      font-weight: 700;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <!-- ✅ CONTENT SECURITY POLICY (Malware Protection) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://forms.app https://pagead2.googlesyndication.com https://partner.googleadservices.com https://*.googlesyndication.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://forms.app https://*.googlesyndication.com https://*.google.com https://*.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://forms.app https://*.forms.app https://*.googlesyndication.com; frame-src 'self' https://forms.app https://*.forms.app https://*.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none';">
+    <meta name="theme-color" content="#1e293b" />
     
-    .header-stats {
-      margin-top: 16px;
-      display: flex;
-      gap: 20px;
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+          /* Material 3 Color Palette */
+          --primary: #2563eb;
+          --primary-hover: #1d4ed8;
+          --primary-light: #dbeafe;
+          --secondary: #8b5cf6;
+          --success: #10b981;
+          --success-light: #d1fae5;
+          --warning: #f59e0b;
+          --warning-light: #fef3c7;
+          --error: #ef4444;
+          --error-light: #fee2e2;
+
+          /* Neutrals */
+          --gray-50: #f9fafb;
+          --gray-100: #f3f4f6;
+          --gray-200: #e5e7eb;
+          --gray-300: #d1d5db;
+          --gray-500: #6b7280;
+          --gray-600: #4b5563;
+          --gray-700: #374151;
+          --gray-800: #1f2937;
+          --gray-900: #111827;
+
+          /* Card & Background */
+          --bg-body: #f8fafc;
+          --card-bg: #ffffff;
+
+          /* Shadows */
+          --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+          --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+          --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+          /* Border Radius */
+          --radius-sm: 8px;
+          --radius-md: 12px;
+          --radius-lg: 16px;
+          --radius-xl: 20px;
+
+          /* Transitions */
+          --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+          --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          color: var(--gray-900);
+          padding: 0;
+          min-height: 100vh;
+          overflow-x: hidden;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image:
+            radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .container {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 20px;
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Header Section */
+        .course-header {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border-radius: var(--radius-xl);
+          padding: 32px;
+          color: var(--gray-900);
+          box-shadow: var(--shadow-xl);
+          margin-bottom: 24px;
+          position: relative;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .course-header::before {
+          content: "";
+          position: absolute;
+          top: -50%;
+          right: -20%;
+          width: 300px;
+          height: 300px;
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          border-radius: 50%;
+          opacity: 0.08;
+          pointer-events: none;
+        }
+
+        .header-content { position: relative; z-index: 1; }
+
+        .course-code {
+          display: inline-block;
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          color: white;
+          padding: 6px 16px;
+          border-radius: 20px;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          margin-bottom: 12px;
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .course-title {
+          margin: 0 0 16px 0;
+          font-size: 2rem;
+          font-weight: 800;
+          letter-spacing: -0.5px;
+          background: linear-gradient(135deg, var(--gray-900), var(--gray-600));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          line-height: 1.2;
+        }
+
+        .header-stats {
+          display: flex;
+          gap: 24px;
+          font-size: 0.875rem;
+          color: var(--gray-600);
+          font-weight: 500;
+          flex-wrap: wrap;
+        }
+
+        .stat-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 0;
+        }
+
+        .stat-item svg { width: 18px; height: 18px; color: var(--primary); }
+
+        /* Progress Bar */
+        .progress-container {
+          margin-top: 20px;
+          padding-top: 20px;
+          border-top: 1px solid var(--gray-200);
+        }
+
+        .progress-label {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.75rem;
+          color: var(--gray-600);
+          margin-bottom: 8px;
+          font-weight: 600;
+        }
+
+        .progress-bar {
+          height: 8px;
+          background: var(--gray-200);
+          border-radius: 10px;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg, var(--primary), var(--secondary));
+          border-radius: 10px;
+          width: 0%;
+          transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+
+        /* File Cards Grid */
+        .file-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .file-card {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border-radius: var(--radius-lg);
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: var(--shadow-md);
+          transition: all var(--transition-base);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Hover Effect */
+        .file-card::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          transition: left 0.5s ease;
+        }
+
+        .file-card:active { transform: scale(0.98); }
+        .file-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: var(--shadow-xl); border-color: rgba(37, 99, 235, 0.3); }
+        .file-card:hover::before { left: 100%; }
+
+        .card-left {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex: 1;
+          min-width: 0;
+        }
+
+        /* Icon Wrapper */
+        .icon-wrapper {
+          width: 56px;
+          height: 56px;
+          border-radius: var(--radius-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          position: relative;
+          transition: all var(--transition-base);
+        }
+
+        .file-card:hover .icon-wrapper { transform: rotate(5deg) scale(1.1); }
+
+        .icon-wrapper.notes {
+          background: linear-gradient(135deg, #3b82f6, #2563eb);
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .icon-wrapper.qp {
+          background: linear-gradient(135deg, #f59e0b, #d97706);
+          box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .icon-wrapper.iq {
+          background: linear-gradient(135deg, #10b981, #059669);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .icon-wrapper svg {
+          width: 28px;
+          height: 28px;
+          fill: white;
+          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .file-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-width: 0;
+          flex: 1;
+        }
+
+        .file-title {
+          font-weight: 700;
+          font-size: 1rem;
+          color: var(--gray-900);
+          margin-bottom: 6px;
+          letter-spacing: -0.2px;
+        }
+
+        .file-meta {
+          font-size: 0.8rem;
+          color: var(--gray-600);
+          display: flex;
+          gap: 8px;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
+        /* Badges */
+        .badge {
+          font-size: 0.65rem;
+          padding: 4px 10px;
+          border-radius: 6px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          border: 1px solid;
+        }
+
+        .badge.notes-badge { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+        .badge.exam-badge { background: var(--warning-light); color: #92400e; border-color: var(--warning); }
+        .badge.study-badge { background: var(--success-light); color: #065f46; border-color: var(--success); }
+
+        .download-status {
+          background: var(--error-light);
+          color: #991b1b;
+          border-color: var(--error);
+          transition: all var(--transition-base);
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+        .downloaded {
+          background: var(--success-light) !important;
+          color: #065f46 !important;
+          border-color: var(--success) !important;
+          animation: none !important;
+        }
+
+        .file-size { color: var(--gray-500); font-weight: 600; }
+
+        /* Card Actions */
+        .card-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+        .btn {
+          text-decoration: none;
+          min-width: 44px;
+          height: 44px;
+          border-radius: var(--radius-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all var(--transition-base);
+          border: none;
+          cursor: pointer;
+          font-family: inherit;
+          font-weight: 600;
+          font-size: 0.875rem;
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Ripple */
+        .btn::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(0);
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          transition: transform 0.5s ease;
+        }
+        .btn:active::after { transform: translate(-50%, -50%) scale(2); }
+
+        .btn-view { color: var(--gray-700); background: var(--gray-100); }
+        .btn-view:hover { background: var(--gray-200); color: var(--gray-900); }
+        .btn-view:active { transform: scale(0.95); }
+
+        .btn-download {
+          background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+          color: white;
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        .btn-download:hover { box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4); transform: translateY(-2px); }
+        .btn-download:active { transform: translateY(0) scale(0.95); }
+
+        /* Open Button */
+        .btn-open {
+          background: linear-gradient(135deg, var(--success), #059669) !important;
+          color: white !important;
+          width: auto !important;
+          padding: 0 20px !important;
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+          gap: 8px;
+        }
+        .btn-open:hover { box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4) !important; transform: translateY(-2px) !important; }
+        .btn-open:active { transform: translateY(0) scale(0.95) !important; }
+
+        .hidden { display: none !important; }
+
+        /* Spinner */
+        .spinner {
+          width: 20px;
+          height: 20px;
+          border: 3px solid rgba(255, 255, 255, 0.3);
+          border-top-color: white;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Toast */
+        .toast {
+          position: fixed;
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(-50%) translateY(100px);
+          background: rgba(17, 24, 39, 0.95);
+          color: white;
+          padding: 16px 24px;
+          border-radius: var(--radius-md);
+          box-shadow: var(--shadow-xl);
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          z-index: 1000;
+          opacity: 0;
+          transition: all var(--transition-base);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          max-width: 90%;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast-icon { width: 24px; height: 24px; flex-shrink: 0; }
+        .toast-message { font-size: 0.875rem; font-weight: 500; }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+          body { padding: 0; }
+          .container { padding: 16px; }
+          .course-header { padding: 24px; border-radius: var(--radius-lg); }
+          .course-title { font-size: 1.5rem; }
+          .file-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 16px; }
+          .card-actions { width: 100%; justify-content: flex-end; }
+          .btn-open { width: 100% !important; justify-content: center; }
+        }
     
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
 
-    /* --- File Cards List --- */
-    .file-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+/* =================================
+   Premium Mega Footer
+==================================== */
+.site-footer {
+    background: #0f172a; /* Deep premium blue-gray */
+    color: #e2e8f0;
+    padding: 80px 20px 40px;
+    font-family: 'Open Sans', 'Inter', sans-serif;
+    margin-top: 100px;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+}
+.site-footer .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 50px;
+}
+.site-footer h3 {
+    font-size: 1.25rem;
+    margin-bottom: 25px;
+    color: #e0e7ff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 12px;
+}
+.site-footer h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 2px;
+}
+.site-footer p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #94a3b8;
+}
+.site-footer .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.site-footer .footer-list li {
+    margin-bottom: 16px;
+}
+.site-footer .footer-list a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.site-footer .footer-list a:hover {
+    color: #3b82f6;
+    transform: translateX(6px);
+}
+/* Dropdown Group */
+.dropdown-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+.dropdown-group label {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+.footer-select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    outline: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px top 50%;
+    background-size: 12px auto;
+}
+.footer-select:focus {
+    border-color: #3b82f6;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+.footer-select option {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
 
-    .file-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s ease;
-      border: 1px solid white;
-      position: relative;
-    }
+.site-footer .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 0.9rem;
+    color: #64748b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.footer-bottom a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-bottom a:hover {
+    color: #3b82f6;
+}
 
-    .file-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--primary-light);
+@media (max-width: 768px) {
+    .site-footer { padding: 60px 20px 30px; margin-top: 60px; }
+    .site-footer .footer-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
+    .footer-bottom { flex-direction: column; gap: 10px; }
+}
 
-    /* Left Side: Icon + Text */
-    .card-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+</style>
 
-    /* Custom PDF Icon */
-    .icon-wrapper {
-      width: 50px;
-      height: 50px;
-      background: #fee2e2;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: #ef4444;
-    }
-    
-    .icon-wrapper.qp { background: #ffedd5; color: #f97316; } /* Orange for QP */
-    .icon-wrapper.iq { background: #dcfce7; color: #22c55e; } /* Green for IQ */
+    <!-- ✅ SEO TITLE -->
+    <title>Fluid Mechanics - Files - Engineering Notes & PDFs | BTechBook</title>
 
-    .icon-wrapper svg {
-      width: 26px;
-      height: 26px;
-      fill: currentColor;
-    }
+    <!-- ✅ META DESCRIPTION -->
+    <meta name="description" content="Download free Fluid Mechanics - Files - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.">
 
-    .file-info {
-      display: flex;
-      flex-direction: column;
-    }
+    <!-- ✅ CANONICAL (VERY IMPORTANT) -->
+    <link rel="canonical" href="https://btechbook.in/mech\fluidmechanics.html">
 
-    .file-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: #0f172a;
-      margin-bottom: 4px;
-    }
+    <!-- ✅ OPEN GRAPH (Sharing Boost) -->
+    <meta property="og:title" content="Fluid Mechanics - Files - Engineering Notes & PDFs | BTechBook">
+    <meta property="og:description" content="Download free Fluid Mechanics - Files - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://btechbook.in/mech\fluidmechanics.html">
 
-    .file-meta {
-      font-size: 0.8rem;
-      color: var(--secondary-color);
-      display: flex;
-      gap: 12px;
-      align-items: center;
+    <!-- ✅ SCHEMA (Educational Material) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "BTechBook",
+      "url": "https://btechbook.in/",
+      "description": "Download free Fluid Mechanics - Files - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.",
+      "educationalLevel": "Undergraduate",
+      "sameAs": [
+        "https://btechbook.in/"
+      ]
     }
-    
-    .badge {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: 4px;
-      background: #f1f5f9;
-      font-weight: 600;
-      color: #64748b;
-    }
+    </script>
 
-    /* Right Side: Actions */
-    .card-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn {
-      text-decoration: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .btn-view {
-      color: var(--primary-color);
-      background: transparent;
-    }
-    .btn-view:hover { background: var(--primary-light); }
-
-    .btn-download {
-      background: #f1f5f9;
-      color: #334155;
-    }
-    .btn-download:hover {
-      background: #1e293b;
-      color: white;
-      transform: scale(1.05);
-    }
-
-    /* Mobile */
-    @media (max-width: 600px) {
-      .file-card { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .card-actions { width: 100%; justify-content: flex-end; }
-      .header-content h1 { font-size: 1.8rem; }
-    }
-  </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZSPNESPG3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TZSPNESPG3');
+    </script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+<!-- GLOBAL PC LOGO -->
+<style>
+.global-pc-logo {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-family: 'Open Sans', Arial, sans-serif;
+  transition: transform 0.28s ease;
+}
+.global-pc-logo:hover {
+  transform: translateY(-2px);
+}
+.global-pc-logo .brand-icon {
+  width: 38px; height: 38px; min-width: 38px; min-height: 38px;
+  background-color: #0284c7; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.05rem;
+  box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.22);
+  transition: transform 0.28s ease;
+}
+.global-pc-logo:hover .brand-icon {
+  transform: rotate(12deg);
+}
+.global-pc-logo .brand-text {
+  font-weight: 800; font-size: 1.4rem; color: #0f172a; line-height: 1; letter-spacing: -0.35px;
+}
+.global-pc-logo .brand-highlight { color: #0284c7; }
+@media (max-width: 768px) {
+  .global-pc-logo { display: none !important; }
+}
+</style>
+<a href="/index.html" class="global-pc-logo">
+    <div class="brand-icon">
+        <i class="fas fa-book-open"></i>
+    </div>
+    <span class="brand-text">BTechBook<span class="brand-highlight">.in</span></span>
+</a>
+<!-- END GLOBAL PC LOGO -->
 
-  <div class="container">
-    
+<div class="container">
+
     <div class="course-header">
-      <div class="header-content">
-        <h2>ME205</h2>
-        <h1>Fluid Mechanics</h1>
-        <div class="header-stats">
-          <div class="stat-item">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-            7 Files
-          </div>
-          <div class="stat-item">•</div>
-          <div class="stat-item">Updated Jan 2020</div>
+        <div class="header-content">
+            <span class="course-code">ME205</span>
+            <h1 class="course-title">Fluid Mechanics</h1>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    <span id="total-files">7 Files</span>
+                </div>
+                <div class="stat-item">•</div>
+                <div class="stat-item">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span>Updated Jan 2026</span>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Download Progress</span>
+                    <span id="progress-text">0/7 files</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <div class="file-grid">
 
-      <div class="file-card">
-        <div class="card-left">
-          <div class="icon-wrapper">
-            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
-          </div>
-          <div class="file-info">
-            <div class="file-title">Unit 1 - Introduction</div>
-            <div class="file-meta">
-              <span class="badge">NOTES</span>
-              <span>FM(U1).pdf • 1.0 MB</span>
+        <div class="file-card" id="card-FM-U1">
+            <div class="card-left">
+                <div class="icon-wrapper notes"><svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></div>
+                <div class="file-info">
+                    <div class="file-title">Unit 1 - Introduction</div>
+                    <div class="file-meta">
+                        <span class="badge notes-badge">Notes</span>
+                        <span class="badge download-status" id="status-FM-U1">Not downloaded</span>
+                        <span class="file-size">1.0 MB</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-actions">
+                <button class="btn btn-view" id="view-FM-U1" onclick="viewOnline('https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U1).pdf')" aria-label="View Unit 1 online">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                </button>
+                <button class="btn btn-download action-btn" id="btn-FM-U1"
+                        onclick="handleAction(this)"
+                        data-pdf-url="https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U1).pdf"
+                        data-pdf-name="FM_U1.pdf"
+                        data-status-id="status-FM-U1"
+                        data-view-id="view-FM-U1"
+                        aria-label="Download Unit 1">
+                    <svg class="icon-dl" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <span class="text-open hidden">OPEN</span>
+                </button>
+            </div>
         </div>
-        <div class="card-actions">
-          <a href="pdf/FM/FM(U1).pdf" class="btn btn-view" title="Preview"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></a>
-          <a href="pdf/FM/FM(U1).pdf" class="btn btn-download" title="Download"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg></a>
-        </div>
-      </div>
 
-      <div class="file-card">
-        <div class="card-left">
-          <div class="icon-wrapper">
-            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
-          </div>
-          <div class="file-info">
-            <div class="file-title">Unit 2 - Fluid Statics</div>
-            <div class="file-meta">
-              <span class="badge">NOTES</span>
-              <span>FM(U2).pdf • 1.5 MB</span>
+        <div class="file-card" id="card-FM-U2">
+            <div class="card-left">
+                <div class="icon-wrapper notes"><svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></div>
+                <div class="file-info">
+                    <div class="file-title">Unit 2 - Fluid Statics</div>
+                    <div class="file-meta">
+                        <span class="badge notes-badge">Notes</span>
+                        <span class="badge download-status" id="status-FM-U2">Not downloaded</span>
+                        <span class="file-size">1.5 MB</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-actions">
+                <button class="btn btn-view" id="view-FM-U2" onclick="viewOnline('https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U2).pdf')" aria-label="View Unit 2 online">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                </button>
+                <button class="btn btn-download action-btn" id="btn-FM-U2"
+                        onclick="handleAction(this)"
+                        data-pdf-url="https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U2).pdf"
+                        data-pdf-name="FM_U2.pdf"
+                        data-status-id="status-FM-U2"
+                        data-view-id="view-FM-U2"
+                        aria-label="Download Unit 2">
+                    <svg class="icon-dl" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <span class="text-open hidden">OPEN</span>
+                </button>
+            </div>
         </div>
-        <div class="card-actions">
-          <a href="pdf/FM/FM(U2).pdf" class="btn btn-view" title="Preview"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></a>
-          <a href="pdf/FM/FM(U2).pdf" class="btn btn-download" title="Download"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg></a>
-        </div>
-      </div>
 
-      <div class="file-card">
-        <div class="card-left">
-          <div class="icon-wrapper">
-            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
-          </div>
-          <div class="file-info">
-            <div class="file-title">Unit 3 - Fluid Dynamics</div>
-            <div class="file-meta">
-              <span class="badge">NOTES</span>
-              <span>FM(U3).pdf • 1.3 MB</span>
+        <div class="file-card" id="card-FM-U3">
+            <div class="card-left">
+                <div class="icon-wrapper notes"><svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></div>
+                <div class="file-info">
+                    <div class="file-title">Unit 3 - Fluid Dynamics</div>
+                    <div class="file-meta">
+                        <span class="badge notes-badge">Notes</span>
+                        <span class="badge download-status" id="status-FM-U3">Not downloaded</span>
+                        <span class="file-size">1.3 MB</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-actions">
+                <button class="btn btn-view" id="view-FM-U3" onclick="viewOnline('https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U3).pdf')" aria-label="View Unit 3 online">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                </button>
+                <button class="btn btn-download action-btn" id="btn-FM-U3"
+                        onclick="handleAction(this)"
+                        data-pdf-url="https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U3).pdf"
+                        data-pdf-name="FM_U3.pdf"
+                        data-status-id="status-FM-U3"
+                        data-view-id="view-FM-U3"
+                        aria-label="Download Unit 3">
+                    <svg class="icon-dl" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <span class="text-open hidden">OPEN</span>
+                </button>
+            </div>
         </div>
-        <div class="card-actions">
-          <a href="pdf/FM/FM(U3).pdf" class="btn btn-view" title="Preview"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></a>
-          <a href="pdf/FM/FM(U3).pdf" class="btn btn-download" title="Download"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg></a>
-        </div>
-      </div>
 
-      <div class="file-card">
-        <div class="card-left">
-          <div class="icon-wrapper">
-            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
-          </div>
-          <div class="file-info">
-            <div class="file-title">Unit 4 - Boundary Layer</div>
-            <div class="file-meta">
-              <span class="badge">NOTES</span>
-              <span>FM(U4).pdf • 1.1 MB</span>
+        <div class="file-card" id="card-FM-U4">
+            <div class="card-left">
+                <div class="icon-wrapper notes"><svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></div>
+                <div class="file-info">
+                    <div class="file-title">Unit 4 - Boundary Layer</div>
+                    <div class="file-meta">
+                        <span class="badge notes-badge">Notes</span>
+                        <span class="badge download-status" id="status-FM-U4">Not downloaded</span>
+                        <span class="file-size">1.1 MB</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-actions">
+                <button class="btn btn-view" id="view-FM-U4" onclick="viewOnline('https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U4).pdf')" aria-label="View Unit 4 online">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                </button>
+                <button class="btn btn-download action-btn" id="btn-FM-U4"
+                        onclick="handleAction(this)"
+                        data-pdf-url="https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U4).pdf"
+                        data-pdf-name="FM_U4.pdf"
+                        data-status-id="status-FM-U4"
+                        data-view-id="view-FM-U4"
+                        aria-label="Download Unit 4">
+                    <svg class="icon-dl" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <span class="text-open hidden">OPEN</span>
+                </button>
+            </div>
         </div>
-        <div class="card-actions">
-          <a href="pdf/FM/FM(U4).pdf" class="btn btn-view" title="Preview"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></a>
-          <a href="pdf/FM/FM(U4).pdf" class="btn btn-download" title="Download"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg></a>
-        </div>
-      </div>
 
-      <div class="file-card">
-        <div class="card-left">
-          <div class="icon-wrapper">
-            <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
-          </div>
-          <div class="file-info">
-            <div class="file-title">Unit 5 </div>
-            <div class="file-meta">
-              <span class="badge">NOTES</span>
-              <span>FM(U5).pdf • 1.3 MB</span>
+        <div class="file-card" id="card-FM-U5">
+            <div class="card-left">
+                <div class="icon-wrapper notes"><svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></div>
+                <div class="file-info">
+                    <div class="file-title">Unit 5</div>
+                    <div class="file-meta">
+                        <span class="badge notes-badge">Notes</span>
+                        <span class="badge download-status" id="status-FM-U5">Not downloaded</span>
+                        <span class="file-size">1.3 MB</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-actions">
+                <button class="btn btn-view" id="view-FM-U5" onclick="viewOnline('https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U5).pdf')" aria-label="View Unit 5 online">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                </button>
+                <button class="btn btn-download action-btn" id="btn-FM-U5"
+                        onclick="handleAction(this)"
+                        data-pdf-url="https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(U5).pdf"
+                        data-pdf-name="FM_U5.pdf"
+                        data-status-id="status-FM-U5"
+                        data-view-id="view-FM-U5"
+                        aria-label="Download Unit 5">
+                    <svg class="icon-dl" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <span class="text-open hidden">OPEN</span>
+                </button>
+            </div>
         </div>
-        <div class="card-actions">
-          <a href="pdf/FM/FM(U5).pdf" class="btn btn-view" title="Preview"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></a>
-          <a href="pdf/FM/FM(U5).pdf" class="btn btn-download" title="Download"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg></a>
-        </div>
-      </div>
 
-      <div class="file-card">
-        <div class="card-left">
-          <div class="icon-wrapper iq">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-          </div>
-          <div class="file-info">
-            <div class="file-title">Important Questions (IQ)</div>
-            <div class="file-meta">
-              <span class="badge" style="background: #dcfce7; color: #166534;">STUDY</span>
-              <span>FM(IQ).pdf • 805 KB</span>
+        <div class="file-card" id="card-FM-IQ">
+            <div class="card-left">
+                <div class="icon-wrapper iq"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+                <div class="file-info">
+                    <div class="file-title">Important Questions (IQ)</div>
+                    <div class="file-meta">
+                        <span class="badge study-badge">Study</span>
+                        <span class="badge download-status" id="status-FM-IQ">Not downloaded</span>
+                        <span class="file-size">805 KB</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-actions">
+                <button class="btn btn-view" id="view-FM-IQ" onclick="viewOnline('https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(IQ).pdf')" aria-label="View Important Questions online">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                </button>
+                <button class="btn btn-download action-btn" id="btn-FM-IQ"
+                        onclick="handleAction(this)"
+                        data-pdf-url="https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(IQ).pdf"
+                        data-pdf-name="FM_IQ.pdf"
+                        data-status-id="status-FM-IQ"
+                        data-view-id="view-FM-IQ"
+                        aria-label="Download Important Questions">
+                    <svg class="icon-dl" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+                    <span class="text-open hidden">OPEN</span>
+                </button>
+            </div>
         </div>
-        <div class="card-actions">
-          <a href="pdf/FM/FM(IQ).pdf" class="btn btn-view" title="Preview"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></a>
-          <a href="pdf/FM/FM(IQ).pdf" class="btn btn-download" title="Download"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg></a>
-        </div>
-      </div>
 
-      <div class="file-card">
-        <div class="card-left">
-          <div class="icon-wrapper qp">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-          </div>
-          <div class="file-info">
-            <div class="file-title">Question Paper (2020)</div>
-            <div class="file-meta">
-              <span class="badge" style="background: #ffedd5; color: #9a3412;">EXAM</span>
-              <span>FM(QP).pdf • 160 KB</span>
+        <div class="file-card" id="card-FM-QP">
+            <div class="card-left">
+                <div class="icon-wrapper qp"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div>
+                <div class="file-info">
+                    <div class="file-title">Question Paper (2020)</div>
+                    <div class="file-meta">
+                        <span class="badge exam-badge">Exam</span>
+                        <span class="badge download-status" id="status-FM-QP">Not downloaded</span>
+                        <span class="file-size">160 KB</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-actions">
+                <button class="btn btn-view" id="view-FM-QP" onclick="viewOnline('https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(QP).pdf')" aria-label="View Question Paper online">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                </button>
+                <button class="btn btn-download action-btn" id="btn-FM-QP"
+                        onclick="handleAction(this)"
+                        data-pdf-url="https://raw.githubusercontent.com/Aisht-1110/Btechbook/main/mech/pdf/FM/FM(QP).pdf"
+                        data-pdf-name="FM_QP.pdf"
+                        data-status-id="status-FM-QP"
+                        data-view-id="view-FM-QP"
+                        aria-label="Download Question Paper">
+                    <svg class="icon-dl" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+                    <span class="text-open hidden">OPEN</span>
+                </button>
+            </div>
         </div>
-        <div class="card-actions">
-          <a href="pdf/FM/FM(QP).pdf" class="btn btn-view" title="Preview"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></a>
-          <a href="pdf/FM/FM(QP).pdf" class="btn btn-download" title="Download"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg></a>
-        </div>
-      </div>
 
     </div>
-  </div>
+</div>
 
+<div class="toast" id="toast">
+    <svg class="toast-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    <span class="toast-message" id="toast-message"></span>
+</div>
+
+<script>
+    // Global state tracking
+    let downloadedCount = 0;
+    const totalFiles = 7;
+
+    // 1. Initialize on Page Load
+    window.onload = function() {
+        console.log("🚀 Page loaded - Checking downloaded files");
+
+        const buttons = document.querySelectorAll(".action-btn");
+        buttons.forEach(btn => {
+            const name = btn.dataset.pdfName;
+            const statusId = btn.dataset.statusId;
+
+            // Call Android Bridge to check if file exists
+            if (typeof BTechBook !== "undefined" && BTechBook.checkFile) {
+                console.log("📂 Checking file:", name);
+                BTechBook.checkFile(name, statusId);
+            } else {
+                console.warn("⚠️ BTechBook bridge not available (running on PC)");
+            }
+        });
+
+        // Animate progress bar on load
+        setTimeout(() => {
+            updateProgress();
+        }, 500);
+    };
+
+    // 2. Handle Action Button
+    function handleAction(btn) {
+        const url = btn.dataset.pdfUrl;
+        const name = btn.dataset.pdfName;
+        const statusId = btn.dataset.statusId;
+        const isDownloaded = btn.classList.contains('btn-open');
+
+        console.log("🎯 Button clicked:", name);
+
+        // Check if running on Android
+        if (typeof BTechBook === "undefined") {
+            console.warn("⚠️ Running on PC - Opening in new tab");
+            window.open(url, '_blank');
+            showToast('Opening file in new tab...');
+            return;
+        }
+
+        // If file is already downloaded, OPEN it
+        if (isDownloaded) {
+            console.log("✅ Opening downloaded file:", name);
+
+            // Construct the file path where it was downloaded
+            const filePath = `/storage/emulated/0/Android/data/in.btechbook.app/files/pdfs/${name}`;
+
+            if (BTechBook.openPdfViewer) {
+                BTechBook.openPdfViewer(filePath, name);
+            } else {
+                console.error("❌ openPdfViewer method not found");
+                showToast('Error: Cannot open PDF');
+            }
+
+        } else {
+            // File NOT downloaded yet - DOWNLOAD it
+            console.log("⬇️ Starting download:", name);
+
+            // Show loading state
+            const icon = btn.querySelector('.icon-dl');
+            if (icon) {
+                icon.innerHTML = '<div class="spinner"></div>';
+            }
+
+            if (BTechBook.downloadPdf) {
+                BTechBook.downloadPdf(url, name, statusId);
+                showToast('Downloading ' + name + '...');
+            } else {
+                console.error("❌ downloadPdf method not found");
+                showToast('Error: Cannot download PDF');
+            }
+        }
+    }
+
+    // 3. View Online (Eye Button)
+    function viewOnline(url) {
+        console.log("👁️ Opening online viewer for:", url);
+        window.open("https://docs.google.com/viewer?url=" + encodeURIComponent(url) + "&embedded=true", '_blank');
+        showToast('Opening online viewer...');
+    }
+
+    // 4. Mark File as Downloaded (Called by Android after successful download)
+    function markDownloaded(statusId) {
+        console.log("✅ markDownloaded called for:", statusId);
+
+        // Update status badge
+        const badge = document.getElementById(statusId);
+        if (badge) {
+            badge.textContent = "Downloaded ✓";
+            badge.classList.add("downloaded");
+        }
+
+        // Find and update action button
+        const btn = document.querySelector(`.action-btn[data-status-id="${statusId}"]`);
+        if (btn) {
+            // Hide view button
+            const viewBtnId = btn.dataset.viewId;
+            const viewBtn = document.getElementById(viewBtnId);
+            if (viewBtn) {
+                viewBtn.style.opacity = '0';
+                setTimeout(() => viewBtn.classList.add('hidden'), 300);
+            }
+
+            // Transform to open button
+            btn.classList.remove('btn-download');
+            btn.classList.add('btn-open');
+
+            // Update button content
+            const icon = btn.querySelector('.icon-dl');
+            const text = btn.querySelector('.text-open');
+
+            if (icon) {
+                icon.style.opacity = '0';
+                setTimeout(() => {
+                    icon.classList.add('hidden');
+                    icon.innerHTML = '<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>';
+                }, 200);
+            }
+
+            if (text) {
+                setTimeout(() => text.classList.remove('hidden'), 200);
+            }
+
+            // Update progress
+            downloadedCount++;
+            updateProgress();
+            showToast('File downloaded! You can now open it.');
+        }
+    }
+
+    // 5. Mark File as Deleted (Called by Android after deletion)
+    function markDeleted(statusId) {
+        console.log("🗑️ markDeleted called for:", statusId);
+
+        // Update status badge
+        const badge = document.getElementById(statusId);
+        if (badge) {
+            badge.textContent = "Not downloaded";
+            badge.classList.remove("downloaded");
+        }
+
+        // Find and revert action button
+        const btn = document.querySelector(`.action-btn[data-status-id="${statusId}"]`);
+        if (btn) {
+            // Show view button again
+            const viewBtnId = btn.dataset.viewId;
+            const viewBtn = document.getElementById(viewBtnId);
+            if (viewBtn) {
+                viewBtn.classList.remove('hidden');
+                viewBtn.style.opacity = '1';
+            }
+
+            // Revert to download button
+            btn.classList.remove('btn-open');
+            btn.classList.add('btn-download');
+
+            // Update button content
+            const icon = btn.querySelector('.icon-dl');
+            const text = btn.querySelector('.text-open');
+
+            if (text) text.classList.add('hidden');
+            if (icon) {
+                icon.classList.remove('hidden');
+                icon.style.opacity = '1';
+            }
+
+            // Update progress
+            downloadedCount--;
+            updateProgress();
+            showToast('File deleted');
+        }
+    }
+
+    // 6. Update Progress Bar
+    function updateProgress() {
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+
+        const percentage = (downloadedCount / totalFiles) * 100;
+
+        if (progressFill) {
+            progressFill.style.width = percentage + '%';
+        }
+
+        if (progressText) {
+            progressText.textContent = `${downloadedCount}/${totalFiles} files`;
+        }
+
+        // Show completion toast
+        if (downloadedCount === totalFiles) {
+            setTimeout(() => {
+                showToast('All files downloaded! 🎉');
+            }, 500);
+        }
+    }
+
+    // 7. Toast Notification System
+    function showToast(message, duration = 3000) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        if (toast && toastMessage) {
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+    }
+
+    // 8. Error Handling
+    function downloadFailed(statusId, errorMessage) {
+        console.error("❌ Download failed for:", statusId, "-", errorMessage);
+
+        const btn = document.querySelector(`.action-btn[data-status-id="${statusId}"]`);
+        if (btn) {
+            const icon = btn.querySelector('.icon-dl');
+            if (icon) {
+                // Restore download icon
+                icon.innerHTML = '<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>';
+            }
+        }
+        showToast(errorMessage || 'Download failed. Please try again.', 4000);
+    }
+
+    // 9. Animation on Scroll
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.file-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = `all 0.4s ease ${index * 0.05}s`;
+            observer.observe(card);
+        });
+    }
+</script>
+
+
+    
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Column 1: About -->
+            <div class="footer-col">
+                <h3>BTechBook</h3>
+                <p>Your one-stop destination for engineering lecture notes, PDF books, and comprehensive study materials across all major branches. Built for B.Tech & Diploma students.</p>
+                <div style="margin-top: 20px;">
+                    <p><strong>Email:</strong> <a href="mailto:asnstudios.app@gmail.com" style="color:#60a5fa; text-decoration:none;">asnstudios.app@gmail.com</a></p>
+                </div>
+            </div>
+
+            <!-- Column 2: Branch Links -->
+            <div class="footer-col">
+                <h3>Engineering Branches</h3>
+                <ul class="footer-list">
+                    <li><a href="../index.html">🏠 Home Page</a></li>
+                    <li><a href="../mech_sub.html">⚙️ Mechanical Engineering</a></li>
+                    <li><a href="../cse_sub.html">💻 Computer Science</a></li>
+                    <li><a href="../civil-subjects.html">🏗️ Civil Engineering</a></li>
+                    <li><a href="../electrical-subjects.html">🔌 Electrical Engineering</a></li>
+                    <li><a href="../metal.html">⛏️ Metallurgy</a></li>
+                    <li><a href="../book.html">📚 Books Library</a></li>
+                    <li><a href="../donate.html" style="color:#f59e0b; font-weight:600;">?? Support / Donate</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Subject Quick Jump -->
+            <div class="footer-col">
+                <h3>Jump to Subjects</h3>
+                
+                <div class="dropdown-group">
+                    <label>Mechanical Subjects</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='../' + this.value;">
+                        <option value="">-- Choose Subject --</option>
+                        <option value="mech/thermodynamics.html">Thermodynamics</option>
+                        <option value="mech/fluidmechanics.html">Fluid Mechanics</option>
+                        <option value="mech/mechanics.html">Engg. Mechanics</option>
+                        <option value="mech/manufacturingpractices.html">Manufacturing Tech</option>
+                        <option value="mech/heatandmass.html">Heat and Mass Transfer</option>
+                        <option value="mech_sub.html">View All Mechanical...</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-group">
+                    <label>Computer Science Subjects</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='../' + this.value;">
+                        <option value="">-- Choose Subject --</option>
+                        <option value="cse/datastructure.html">Data Structures</option>
+                        <option value="cse/algorithm.html">Algorithms</option>
+                        <option value="cse/operating-system.html">Operating System</option>
+                        <option value="cse/computernetworks.html">Computer Networks</option>
+                        <option value="cse/datamanagementsys.html">DBMS</option>
+                        <option value="cse_sub.html">View All CSE...</option>
+                    </select>
+                </div>
+                
+                <div class="dropdown-group">
+                    <label>Other Branches</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='../' + this.value;">
+                        <option value="">-- View Branches --</option>
+                        <option value="civil-subjects.html">Civil Engineering</option>
+                        <option value="electrical-subjects.html">Electrical Engineering</option>
+                        <option value="metal.html">Metallurgy</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> BTechBook. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+<script src="../donate-modal.js"></script>
 </body>
 </html>

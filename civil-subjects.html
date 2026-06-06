@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Civil Engineering Subjects</title>
+    <!-- ✅ CONTENT SECURITY POLICY (Malware Protection) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://forms.app https://pagead2.googlesyndication.com https://partner.googleadservices.com https://*.googlesyndication.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://forms.app https://*.googlesyndication.com https://*.google.com https://*.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://forms.app https://*.forms.app https://*.googlesyndication.com; frame-src 'self' https://forms.app https://*.forms.app https://*.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none';">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     /* CSS Variables for easy theme management */
     :root {
-      --primary-color: #2676c7;
-      --primary-hover-color: #1a5a96;
+      --primary-color: #0e7490; /* A color more suited for Civil Engineering (copper/rust) */
+      --primary-hover-color: #96501a;
       --background-color: #f7f7f9;
       --card-background: #ffffff;
       --text-color: #2c3e50;
       --subtle-text-color: #7f8c8d;
       --border-color: #e0e0e0;
-      --card-accent-color: #4a90e2;
+      --card-accent-color: #0891b2; /* A stronger accent color */
     }
 
     body {
@@ -77,7 +79,7 @@
     #search-box:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+      box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.2);
     }
     
     .search-icon {
@@ -141,9 +143,289 @@
         display: none; /* Hidden by default */
     }
 
-  </style>
+  
+
+/* =================================
+   Premium Mega Footer
+==================================== */
+.site-footer {
+    background: #0f172a; /* Deep premium blue-gray */
+    color: #e2e8f0;
+    padding: 80px 20px 40px;
+    font-family: 'Open Sans', 'Inter', sans-serif;
+    margin-top: 100px;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+}
+.site-footer .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 50px;
+}
+.site-footer h3 {
+    font-size: 1.25rem;
+    margin-bottom: 25px;
+    color: #e0e7ff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 12px;
+}
+.site-footer h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 2px;
+}
+.site-footer p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #94a3b8;
+}
+.site-footer .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.site-footer .footer-list li {
+    margin-bottom: 16px;
+}
+.site-footer .footer-list a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.site-footer .footer-list a:hover {
+    color: #3b82f6;
+    transform: translateX(6px);
+}
+/* Dropdown Group */
+.dropdown-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+.dropdown-group label {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+.footer-select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    outline: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px top 50%;
+    background-size: 12px auto;
+}
+.footer-select:focus {
+    border-color: #3b82f6;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+.footer-select option {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+.site-footer .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 0.9rem;
+    color: #64748b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.footer-bottom a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-bottom a:hover {
+    color: #3b82f6;
+}
+
+@media (max-width: 768px) {
+    .site-footer { padding: 60px 20px 30px; margin-top: 60px; }
+    .site-footer .footer-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .footer-bottom { flex-direction: column; gap: 10px; }
+}
+
+</style>
+
+    <!-- ✅ SEO TITLE -->
+    <title>Civil Engineering Subjects - Engineering Notes & PDFs | BTechBook</title>
+
+    <!-- ✅ META DESCRIPTION -->
+    <meta name="description" content="Download free Civil Engineering Subjects - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.">
+
+    <!-- ✅ CANONICAL (VERY IMPORTANT) -->
+    <link rel="canonical" href="https://btechbook.in/mme_sub.html">
+
+    <!-- ✅ OPEN GRAPH (Sharing Boost) -->
+    <meta property="og:title" content="Civil Engineering Subjects - Engineering Notes & PDFs | BTechBook">
+    <meta property="og:description" content="Download free Civil Engineering Subjects - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://btechbook.in/mme_sub.html">
+
+    <!-- ✅ SCHEMA (Educational Material) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "BTechBook",
+      "url": "https://btechbook.in/",
+      "description": "Download free Civil Engineering Subjects - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.",
+      "educationalLevel": "Undergraduate",
+      "sameAs": [
+        "https://btechbook.in/"
+      ]
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZSPNESPG3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TZSPNESPG3');
+    </script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+.coming-soon-badge {
+    font-size: 0.65em;
+    background: #fff7ed;
+    color: #c2410c;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #fdba74;
+    margin-left: 10px;
+    vertical-align: middle;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+/* NEW CSS TO GREY OUT COMING SOON ITEMS */
+.subject-item:has(a[href*="maintainance.html"]), 
+.subject-item:has(a[href*="YOUR_"]) {
+    background: #fdfdfd;
+    border-color: #ecf0f1;
+    border-left-color: #bdc3c7;
+    opacity: 0.65;
+}
+.subject-item:has(a[href*="maintainance.html"]) a, 
+.subject-item:has(a[href*="YOUR_"]) a {
+    cursor: default;
+}
+.subject-item:has(a[href*="maintainance.html"]):hover,
+.subject-item:has(a[href*="YOUR_"]):hover {
+    transform: none;
+    box-shadow: none;
+}
+.subject-item:has(a[href*="maintainance.html"]) .subject-name,
+.subject-item:has(a[href*="YOUR_"]) .subject-name {
+    color: #95a5a6 !important;
+}
+.subject-item:has(a[href*="maintainance.html"]) .subject-code,
+.subject-item:has(a[href*="YOUR_"]) .subject-code {
+    color: #bdc3c7 !important;
+}
+</style>
+
 </head>
 <body>
+<!-- GLOBAL PC LOGO -->
+<style>
+.global-pc-logo {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-family: 'Open Sans', Arial, sans-serif;
+  transition: transform 0.28s ease;
+}
+.global-pc-logo:hover {
+  transform: translateY(-2px);
+}
+.global-pc-logo .brand-icon {
+  width: 38px; height: 38px; min-width: 38px; min-height: 38px;
+  background-color: #0284c7; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.05rem;
+  box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.22);
+  transition: transform 0.28s ease;
+}
+.global-pc-logo:hover .brand-icon {
+  transform: rotate(12deg);
+}
+.global-pc-logo .brand-text {
+  font-weight: 800; font-size: 1.4rem; color: #0f172a; line-height: 1; letter-spacing: -0.35px;
+}
+.global-pc-logo .brand-highlight { color: #0284c7; }
+@media (max-width: 768px) {
+  .global-pc-logo { display: none !important; }
+}
+</style>
+<a href="/index.html" class="global-pc-logo">
+    <div class="brand-icon">
+        <i class="fas fa-book-open"></i>
+    </div>
+    <span class="brand-text">BTechBook<span class="brand-highlight">.in</span></span>
+</a>
+<!-- END GLOBAL PC LOGO -->
 
   <div class="subject-container">
     <a href="index.html" class="back-link">&larr; Back to Departments</a>
@@ -151,184 +433,125 @@
 
     <div class="search-container">
       <svg class="search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
-      <input type="search" id="search-box" placeholder="Search by name or code (e.g., 'Surveying' or 'CE205')...">
+      <input type="search" id="search-box" placeholder="Search by name or code (e.g., 'Iron' or 'MT303')...">
     </div>
 
     <ul id="subject-list">
       <li class="subject-item">
-        <a href="https://www.vssut.ac.in/lecture_notes/lecture1423904717.pdf" target="_blank">
-          <span class="subject-code">CE101</span>
+        <a href="maintainance.html">
+          <span class="subject-code">CE201</span>
+          <span class="subject-name">Solid Mechanics <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="maintainance.html">
+          <span class="subject-code">CE202</span>
+          <span class="subject-name">Fluid Mechanics <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="maintainance.html">
+          <span class="subject-code">CE203</span>
+          <span class="subject-name">Surveying & Topography <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="maintainance.html">
+          <span class="subject-code">CE301</span>
+          <span class="subject-name">Structural Analysis <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="maintainance.html">
+          <span class="subject-code">CE302</span>
+          <span class="subject-name">Geotechnical Engineering <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="maintainance.html">
+          <span class="subject-code">CE303</span>
+          <span class="subject-name">Environmental Engineering <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="maintainance.html">
+          <span class="subject-code">CE304</span>
+          <span class="subject-name">Transportation Engineering <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="maintainance.html">
+          <span class="subject-code">CE401</span>
+          <span class="subject-name">Construction Management <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="maintainance.html">
+          <span class="subject-code">CE402</span>
+          <span class="subject-name">Design of Steel Structures <span class="coming-soon-badge"><i class="fas fa-tools"></i> Coming Soon</span></span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="mech/math1.html">
+          <span class="subject-code">MA101</span>
+          <span class="subject-name">Engineering Mathematics - I</span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="mech/math2.html">
+          <span class="subject-code">MA102</span>
+          <span class="subject-name">Engineering Mathematics - II</span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="mech/math3.html">
+          <span class="subject-code">MA201</span>
+          <span class="subject-name">Engineering Mathematics - III</span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="mech/python.html">
+          <span class="subject-code">CS101</span>
+          <span class="subject-name">Python Programming Notes</span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="https://drive.google.com/drive/folders/18I9LOqP9aEW6mai_gQnLdmDDAhs-XOKu" target="_blank">
+          <span class="subject-code">COMMON</span>
+          <span class="subject-name">Material Science</span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="https://drive.google.com/drive/folders/1PumFUpWre5j5gUV679kTllPLy1Xvz8ri" target="_blank">
+          <span class="subject-code">COMMON</span>
+          <span class="subject-name">Environmental Science</span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="https://drive.google.com/drive/folders/18k3RvIEDVdFtBEJ4VGgtejPWVE55au7J" target="_blank">
+          <span class="subject-code">COMMON</span>
+          <span class="subject-name">Basic Civil and Mechanical Engineering</span>
+        </a>
+      </li>
+      <li class="subject-item">
+        <a href="https://drive.google.com/drive/folders/1lRCn-Jct8-XC4Vkl33x_PmdP-RWgLulL" target="_blank">
+          <span class="subject-code">COMMON</span>
           <span class="subject-name">Engineering Mechanics</span>
         </a>
       </li>
       <li class="subject-item">
-        <a href="https://esenotes.com/building-materials-pdf-handwritten-notes-by-jaspal-sir-building-materials-and-construction/" target="_blank">
-          <span class="subject-code">CE102</span>
-          <span class="subject-name">Building Materials and Construction</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://www.dpgpolytechnic.com/downloads/files/n5c4588acd4d76.pdf" target="_blank">
-          <span class="subject-code">CE201</span>
-          <span class="subject-name">Mechanics of Solids-I (Strength of Materials)</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://esenotes.com/fluid-mechanics-notes-pdf-by-jaspal-sir/" target="_blank">
-          <span class="subject-code">CE203</span>
-          <span class="subject-name">Mechanics of Fluids-I</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://srinix.org/lecture_notes/survey_Eng.pdf" target="_blank">
-          <span class="subject-code">CE205</span>
-          <span class="subject-name">Surveying-I</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://newtondesk.com/geotechnical-engineering-handwritten-study-notes/" target="_blank">
-          <span class="subject-code">CE207</span>
-          <span class="subject-name">Geotechnical Engineering-I</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE209</span>
-          <span class="subject-name">Concrete Technology</span>
-        </a>
-      </li>
-       <li class="subject-item">
-        <a href="https://www.dpgpolytechnic.com/downloads/files/n5c4588acd4d76.pdf" target="_blank">
-          <span class="subject-code">CE202</span>
-          <span class="subject-name">Mechanics of Solids-II (Strength of Materials)</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://esenotes.com/fluid-mechanics-notes-pdf-by-jaspal-sir/" target="_blank">
-          <span class="subject-code">CE204</span>
-          <span class="subject-name">Mechanics of Fluids-II</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://srinix.org/lecture_notes/survey_Eng.pdf" target="_blank">
-          <span class="subject-code">CE206</span>
-          <span class="subject-name">Surveying-II</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://newtondesk.com/geotechnical-engineering-handwritten-study-notes/" target="_blank">
-          <span class="subject-code">CE208</span>
-          <span class="subject-name">Geotechnical Engineering-II</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE210</span>
-          <span class="subject-name">Environmental Engineering-I</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE301</span>
-          <span class="subject-name">Environmental Engineering-II</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://esenotes.com/pdf-structure-analysis-notes-by-jaspal-sir/" target="_blank">
-          <span class="subject-code">CE303</span>
-          <span class="subject-name">Structural Analysis-I</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE305</span>
-          <span class="subject-name">Concrete Structures-I</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE307</span>
-          <span class="subject-name">Steel Structures-I</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://esenotes.com/pdf-hydraulic-machines-notes-by-jaspal-sir/" target="_blank">
-          <span class="subject-code">CE309</span>
-          <span class="subject-name">Hydraulic Machinery</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://www.dpgpolytechnic.com/downloads/files/n5c4588acd4d76.pdf" target="_blank">
-          <span class="subject-code">CE311</span>
-          <span class="subject-name">Advanced Strength of Materials</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://esenotes.com/pdf-structure-analysis-notes-by-jaspal-sir/" target="_blank">
-          <span class="subject-code">CE302</span>
-          <span class="subject-name">Structural Analysis-II</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE304</span>
-          <span class="subject-name">Transportation Engineering-I</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE306</span>
-          <span class="subject-name">Concrete Structures-II</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE308</span>
-          <span class="subject-name">Steel Structures-II</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE310</span>
-          <span class="subject-name">Water Resources Engineering</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://esenotes.com/pdf-structure-analysis-notes-by-jaspal-sir/" target="_blank">
-          <span class="subject-code">CE401</span>
-          <span class="subject-name">Matrix Methods of Structural Analysis</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE403</span>
-          <span class="subject-name">Transportation Engineering-II</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="https://esenotes.com/pdf-hydraulic-machines-notes-by-jaspal-sir/" target="_blank">
-          <span class="subject-code">CE405</span>
-          <span class="subject-name">Irrigation and Hydraulic Structures</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE402</span>
-          <span class="subject-name">Prestressed Concrete Structures</span>
-        </a>
-      </li>
-      <li class="subject-item">
-        <a href="#" target="_blank">
-          <span class="subject-code">CE498</span>
-          <span class="subject-name">Project Work</span>
+        <a href="https://drive.google.com/drive/folders/1sKGmLQrKCZ3PoQ_jvYEvfF82a46vq7Vt" target="_blank">
+          <span class="subject-code">COMMON</span>
+          <span class="subject-name">Communicative English</span>
         </a>
       </li>
       <li id="no-results" style="display: none;">No subjects found.</li>
-    </ul>
+</ul>
   </div>
 
   <script>
     // --- JavaScript for Live Search Functionality ---
+    // This script is generic and does not need to be changed.
 
     document.getElementById('search-box').addEventListener('keyup', function() {
       // 1. Get user input and convert to lowercase for case-insensitive search
@@ -367,5 +590,82 @@
     });
   </script>
 
+
+    
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Column 1: About -->
+            <div class="footer-col">
+                <h3>BTechBook</h3>
+                <p>Your one-stop destination for engineering lecture notes, PDF books, and comprehensive study materials across all major branches. Built for B.Tech & Diploma students.</p>
+                <div style="margin-top: 20px;">
+                    <p><strong>Email:</strong> <a href="mailto:asnstudios.app@gmail.com" style="color:#60a5fa; text-decoration:none;">asnstudios.app@gmail.com</a></p>
+                </div>
+            </div>
+
+            <!-- Column 2: Branch Links -->
+            <div class="footer-col">
+                <h3>Engineering Branches</h3>
+                <ul class="footer-list">
+                    <li><a href="index.html">🏠 Home Page</a></li>
+                    <li><a href="mech_sub.html">⚙️ Mechanical Engineering</a></li>
+                    <li><a href="cse_sub.html">💻 Computer Science</a></li>
+                    <li><a href="civil-subjects.html">🏗️ Civil Engineering</a></li>
+                    <li><a href="electrical-subjects.html">🔌 Electrical Engineering</a></li>
+                    <li><a href="metal.html">⛏️ Civil Engineering</a></li>
+                    <li><a href="book.html">📚 Books Library</a></li>
+                    <li><a href="donate.html" style="color:#f59e0b; font-weight:600;">?? Support / Donate</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Subject Quick Jump -->
+            <div class="footer-col">
+                <h3>Jump to Subjects</h3>
+                
+                <div class="dropdown-group">
+                    <label>Mechanical Subjects</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='' + this.value;">
+                        <option value="">-- Choose Subject --</option>
+                        <option value="mech/thermodynamics.html">Thermodynamics</option>
+                        <option value="mech/fluidmechanics.html">Fluid Mechanics</option>
+                        <option value="mech/mechanics.html">Engg. Mechanics</option>
+                        <option value="mech/manufacturingpractices.html">Manufacturing Tech</option>
+                        <option value="mech/heatandmass.html">Heat and Mass Transfer</option>
+                        <option value="mech_sub.html">View All Mechanical...</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-group">
+                    <label>Computer Science Subjects</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='' + this.value;">
+                        <option value="">-- Choose Subject --</option>
+                        <option value="cse/datastructure.html">Data Structures</option>
+                        <option value="cse/algorithm.html">Algorithms</option>
+                        <option value="cse/operating-system.html">Operating System</option>
+                        <option value="cse/computernetworks.html">Computer Networks</option>
+                        <option value="cse/datamanagementsys.html">DBMS</option>
+                        <option value="cse_sub.html">View All CSE...</option>
+                    </select>
+                </div>
+                
+                <div class="dropdown-group">
+                    <label>Other Branches</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='' + this.value;">
+                        <option value="">-- View Branches --</option>
+                        <option value="civil-subjects.html">Civil Engineering</option>
+                        <option value="electrical-subjects.html">Electrical Engineering</option>
+                        <option value="metal.html">Civil Engineering</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> BTechBook. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+<script src="donate-modal.js"></script>
 </body>
 </html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support BTechBook.in — Donate</title>
+    <meta name="description" content="Support BTechBook.in to help keep engineering notes and books free and ad-free for students across India. Every rupee helps us serve more students.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Using Plus Jakarta Sans for a clean, ultra-modern look instead of serif -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <style>
+        /* =========================================
+           DONATE PAGE — ALTERNATIVE CLEAN UI
+        ========================================== */
+
+        :root {
+            --primary: #3b82f6;       /* Vibrant Blue */
+            --primary-dark: #2563eb;
+            --secondary: #06b6d4;     /* Vibrant Cyan */
+            --accent: #10b981;        /* Emerald */
+            --warning: #f59e0b;       /* Amber */
+            --dark: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --surface: #ffffff;
+            --bg-color: #f8fafc;
+            --border-light: #e2e8f0;
+        }
+
+        .donate-page-body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        /* --- Premium Animated Background --- */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .donate-hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(-45deg, #eff6ff, #e0f2fe, #f0fdfa, #fdf4ff);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+        }
+
+        /* Decorative Blurs for depth */
+        .donate-hero-bg::before,
+        .donate-hero-bg::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: pulse 10s alternate infinite ease-in-out;
+        }
+
+        .donate-hero-bg::before {
+            width: 400px; height: 400px;
+            background: #3b82f6;
+            top: -100px; left: -100px;
+        }
+
+        .donate-hero-bg::after {
+            width: 300px; height: 300px;
+            background: #06b6d4;
+            bottom: 10%; right: -50px;
+            animation-delay: 2s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.4; }
+            100% { transform: scale(1.2) translate(20px, 40px); opacity: 0.7; }
+        }
+
+        .donate-section {
+            position: relative;
+            padding: 100px 24px;
+            min-height: calc(100vh - 180px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .donate-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .donate-content {
+            flex: 1;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .donate-form-area {
+            flex: 1.1;
+        }
+
+        /* =========================================
+           LEFT SIDE — Clean Typography
+        ========================================== */
+        .donate-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
+            color: var(--primary-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+        }
+
+        .donate-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--dark);
+            line-height: 1.1;
+            font-weight: 800;
+            margin: 0 0 24px 0;
+            letter-spacing: -1px;
+        }
+
+        .donate-content h1 .highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .donate-content p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin: 0 0 24px 0;
+        }
+
+        /* --- Clean Stats --- */
+        .impact-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px dashed #cbd5e1;
+        }
+
+        .impact-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .impact-stat-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--dark) 0%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .impact-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* =========================================
+           RIGHT SIDE — Premium Glass Card Design
+        ========================================== */
+        .solid-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 28px;
+            padding: 50px 48px;
+            box-shadow: 
+                0 30px 60px -15px rgba(15, 23, 42, 0.1), 
+                inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(59, 130, 246, 0.05);
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .card-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+        .card-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            margin: 0 0 32px 0;
+        }
+
+        /* --- Payment Options --- */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .payment-option {
+            border: 1.5px solid rgba(226, 232, 240, 0.8);
+            border-radius: 16px;
+            padding: 20px 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -5px rgba(59, 130, 246, 0.15);
+        }
+
+        .payment-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            color: #ffffff;
+            box-shadow: 0 8px 16px -4px rgba(139, 92, 246, 0.4);
+        }
+
+        .payment-option:nth-child(2) .payment-icon {
+            background: linear-gradient(135deg, #06b6d4 0%, #10b981 100%);
+            box-shadow: 0 8px 16px -4px rgba(16, 185, 129, 0.4);
+            color: #ffffff;
+        }
+
+        .payment-info { flex: 1; }
+
+        .payment-info h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0 0 4px 0;
+            font-size: 1.15rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .payment-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* --- Premium CTA Button --- */
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .btn-donate-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 22px 28px;
+            margin-top: 36px;
+            background: linear-gradient(120deg, #3b82f6 0%, #2563eb 25%, #60a5fa 50%, #2563eb 75%, #3b82f6 100%);
+            background-size: 200% auto;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-donate-primary:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 20px 40px -5px rgba(37, 99, 235, 0.5);
+            animation: shine 2s linear infinite;
+        }
+
+        /* --- Accepted Methods Strip --- */
+        .accepted-methods {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .method-icons {
+            display: flex;
+            gap: 16px;
+            font-size: 1.8rem;
+        }
+
+        .method-icons .fa-cc-visa { color: #1a1f71; }
+        .method-icons .fa-cc-mastercard { color: #eb001b; }
+        .method-icons .fa-google-pay { 
+            background: linear-gradient(90deg, #ea4335 25%, #fbbc05 50%, #34a853 75%, #4285f4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 700;
+            background: #f0fdfa;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================== */
+        /* =========================================
+           RESPONSIVE
+        ========================================== */
+        @media (max-width: 900px) {
+            .donate-wrapper {
+                flex-direction: column-reverse; /* Shift text to bottom */
+                gap: 56px;
+            }
+            .donate-content { text-align: center; }
+            .donate-tag { margin-left: auto; margin-right: auto; }
+            .impact-stats { justify-content: center; }
+            .solid-card { padding: 40px 32px; width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .donate-section { padding: 40px 16px 60px; }
+
+            .donate-wrapper { gap: 40px; }
+
+            .donate-content h1 {
+                font-size: 2.2rem;
+                letter-spacing: -0.5px;
+            }
+
+            .donate-content p {
+                font-size: 1.05rem;
+                line-height: 1.7;
+            }
+
+            .impact-stats {
+                flex-direction: row;
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+            .impact-stat-value { font-size: 1.8rem; }
+            .impact-stat-label { font-size: 0.8rem; }
+
+            .solid-card {
+                padding: 32px 20px;
+                border-radius: 20px;
+            }
+
+            .card-title { font-size: 1.5rem; }
+            .card-subtitle { font-size: 0.95rem; margin-bottom: 24px; }
+
+            .payment-option {
+                padding: 16px 20px;
+                gap: 16px;
+            }
+
+            .payment-icon {
+                width: 46px;
+                height: 46px;
+                font-size: 1.2rem;
+            }
+
+            .payment-info h3 { font-size: 1.05rem; }
+            .payment-info p { font-size: 0.9rem; }
+
+            .btn-donate-primary {
+                padding: 18px 24px;
+                font-size: 1.1rem;
+                margin-top: 24px;
+            }
+
+            .accepted-methods {
+                flex-direction: column;
+                gap: 16px;
+                margin-top: 24px;
+            }
+        }
+    </style>
+</head>
+<body class="donate-page-body">
+
+    <header>
+        <div class="header-container">
+            <h1>
+                <a href="index.html" class="brand-logo">
+                    <div class="brand-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <span class="brand-text">BTechBook<span class="brand-highlight">.in</span></span>
+                </a>
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Notes</a></li>
+                    <li><a href="book.html">Books</a></li>
+                    <li><a href="aboutus.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="donate-hero-bg"></div>
+
+    <main>
+        <section class="donate-section">
+            <div class="donate-wrapper">
+
+                <!-- LEFT — Clean Typography Messaging -->
+                <div class="donate-content">
+                    <div class="donate-tag"><i class="fas fa-bolt"></i> Keep Education Open</div>
+                    <h1>Support a <span class="highlight">Free & Ad-Free</span> Platform.</h1>
+                    <p>
+                        We built <strong>BTechBook.in</strong> so every engineering student in India can access top-quality notes without paywalls, subscriptions, or distracting ads.
+                    </p>
+                    <p>
+                        Running fast servers and hosting thousands of PDFs costs money. If our resources helped you crack an exam, your contribution helps us keep the lights on for the next batch of students.
+                    </p>
+
+                    <!-- Impact Stats -->
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <div class="impact-stat-value">100%</div>
+                            <div class="impact-stat-label">Free Resources</div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="impact-stat-value">0</div>
+                            <div class="impact-stat-label">Ads Shown</div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="impact-stat-value">5+</div>
+                            <div class="impact-stat-label">Branches</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT — Colorful Payment Card -->
+                <div class="donate-form-area">
+                    <div class="solid-card">
+                        <h2 class="card-title">Make a Contribution</h2>
+                        <p class="card-subtitle">Choose your preferred way to support</p>
+
+                        <div class="payment-methods">
+
+                            <!-- Option 1: Razorpay Online Payment -->
+                            <div class="payment-option" onclick="window.open('https://rzp.io/rzp/kOeunZsH', '_blank')">
+                                <div class="payment-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <h3>Pay Online</h3>
+                                    <p>UPI, Cards, Net Banking & Wallets</p>
+                                </div>
+                                <i class="fas fa-chevron-right" style="color: var(--text-light); font-size: 1rem;"></i>
+                            </div>
+
+                            <!-- Option 2: UPI Direct -->
+                            <div class="payment-option" onclick="navigator.clipboard.writeText('razorpay.me/@aisht1110'); document.getElementById('upiCopied').style.display='inline';">
+                                <div class="payment-icon">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <h3>Copy Payment Link</h3>
+                                    <p style="color: var(--dark); font-weight: 500;">razorpay.me/@aisht1110
+                                    <span id="upiCopied" style="display:none; color: var(--accent); margin-left:8px; font-weight: 700;"><i class="fas fa-check"></i></span></p>
+                                </div>
+                                <i class="fas fa-copy" style="color: var(--text-light); font-size: 1rem;"></i>
+                            </div>
+
+                        </div>
+
+                        <!-- Primary CTA -->
+                        <a href="https://rzp.io/rzp/kOeunZsH" class="btn-donate-primary" target="_blank" rel="noopener">
+                            Donate via Razorpay
+                        </a>
+
+                        <!-- Accepted Methods -->
+                        <div class="accepted-methods">
+                            <div class="method-icons">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fab fa-google-pay"></i>
+                            </div>
+                            <div class="secure-badge">
+                                <i class="fas fa-shield-check"></i> Secured
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>BTechBook</h3>
+                <p>Your one-stop destination for engineering lecture notes, PDF books, and comprehensive study materials across all major branches. Built for B.Tech & Diploma students.</p>
+                <div style="margin-top: 20px;">
+                    <p><strong>Email:</strong> <a href="mailto:asnstudios.app@gmail.com" style="color:#60a5fa; text-decoration:none;">asnstudios.app@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Engineering Branches</h3>
+                <ul class="footer-list">
+                    <li><a href="index.html">🏠 Home Page</a></li>
+                    <li><a href="mech_sub.html">⚙️ Mechanical Engineering</a></li>
+                    <li><a href="cse_sub.html">💻 Computer Science</a></li>
+                    <li><a href="civil-subjects.html">🏗️ Civil Engineering</a></li>
+                    <li><a href="electrical-subjects.html">🔌 Electrical Engineering</a></li>
+                    <li><a href="metal.html">🔥 Metallurgy</a></li>
+                    <li><a href="book.html">📚 Books Library</a></li>
+                    <li><a href="donate.html" style="color:#f59e0b; font-weight:600;">?? Support / Donate</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-list">
+                    <li><a href="aboutus.html">📖 About Us</a></li>
+                    <li><a href="donate.html">❤️ Donate / Support</a></li>
+                    <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+                    <li><a href="projects.html">🛠️ Source Code & Projects</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> BTechBook. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+<script src="donate-modal.js"></script>
+</body>
+</html>

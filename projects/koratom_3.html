@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particles Swarm Export</title>
+    <style>body { margin: 0; overflow: hidden; background: #000; }</style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        // CONFIG
+        const COUNT = 20000;
+        const SPEED_MULT = 1;
+        const AUTO_SPIN = true;
+
+        // SETUP
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000000, 0.01);
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(0, 0, 100);
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.autoRotate = AUTO_SPIN;
+        controls.autoRotateSpeed = 2.0;
+
+        // POST PROCESSING
+        const composer = new EffectComposer(renderer);
+        composer.addPass(new RenderPass(scene, camera));
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+        bloomPass.strength = 1.8; bloomPass.radius = 0.4; bloomPass.threshold = 0;
+        composer.addPass(bloomPass);
+
+        // SWARM OBJECTS
+        const dummy = new THREE.Object3D();
+        const color = new THREE.Color();
+        const target = new THREE.Vector3();
+        const pColor = new THREE.Color(); // Kept for safety, for potential references
+        
+        // INSTANCED MESH
+        const geometry = new THREE.TetrahedronGeometry(0.25);
+        const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        
+        const instancedMesh = new THREE.InstancedMesh(geometry, material, COUNT);
+        instancedMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+        scene.add(instancedMesh);
+
+        // DATA ARRAYS
+        const positions = [];
+        for(let i=0; i<COUNT; i++) {
+            positions.push(new THREE.Vector3((Math.random()-0.5)*100, (Math.random()-0.5)*100, (Math.random()-0.5)*100));
+            instancedMesh.setColorAt(i, color.setHex(0x00ff88)); // Init Color
+        }
+
+        // CONTROL STUBS
+        const PARAMS = {"speed":1.7,"radius":30,"nucleus":5,"trail":25};
+        const addControl = (id, label, min, max, val) => {
+            return PARAMS[id] !== undefined ? PARAMS[id] : val;
+        };
+        const setInfo = () => {};
+        const annotate = () => {};
+
+        // ANIMATION LOOP
+        const clock = new THREE.Clock();
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+            const time = clock.getElapsedTime() * SPEED_MULT;
+            
+            // Shader Time Update
+            if(material.uniforms && material.uniforms.uTime) {
+                material.uniforms.uTime.value = time;
+            }
+
+            controls.update();
+
+            // SWARM LOGIC
+            const count = COUNT; // Alias for user code compatibility
+            for(let i=0; i<COUNT; i++) {
+                 // USER CODE INJECTION START
+                 const speed = addControl("speed", "Orbit Speed", 0.1, 3.0, 1.7);
+                 const radius = addControl("radius", "Ring Radius", 15, 60, 30);
+                 const nucleusSize = addControl("nucleus", "Nucleus Size", 1, 12, 5);
+                 const trailLen = addControl("trail", "Trail Length", 5, 40, 25);
+                 
+                 const nucleusCount = Math.floor(count * 0.12);
+                 const ringCount = Math.floor(count * 0.65);
+                 const ringSize = Math.floor(ringCount / 3);
+                 const electronTrailCount = Math.floor(count * 0.18);
+                 const trailPerRing = Math.floor(electronTrailCount / 3);
+                 const ambientCount = count - nucleusCount - ringCount - electronTrailCount;
+                 const t = time * speed;
+                 
+                 if (i < nucleusCount) {
+                   const golden = 2.399963;
+                   const theta = Math.acos(1 - 2 * (i + 0.5) / nucleusCount);
+                   const phi = golden * i + t * 0.3;
+                   const r = nucleusSize * (0.5 + 0.5 * Math.pow(Math.abs(Math.sin(t * 1.5 + i * 0.2)), 0.5));
+                   target.set(
+                     Math.sin(theta) * Math.cos(phi) * r,
+                     Math.sin(theta) * Math.sin(phi) * r,
+                     Math.cos(theta) * r
+                   );
+                   const pulse = 0.7 + 0.3 * Math.sin(t * 2.5 + i * 0.1);
+                   color.setRGB(0.65 * pulse, 0.35 * pulse, 1.0 * pulse);
+                 
+                 } else if (i < nucleusCount + ringCount) {
+                   const ri = i - nucleusCount;
+                   const ringIdx = Math.floor(ri / ringSize);
+                   const pi = ri - ringIdx * ringSize;
+                   const frac = pi / ringSize;
+                   const orbitSpeed = (1.0 + ringIdx * 0.3) * (ringIdx === 1 ? -1 : 1);
+                   const angle = frac * Math.PI * 2 + t * orbitSpeed;
+                   let x = Math.cos(angle) * radius;
+                   let y = Math.sin(angle) * radius;
+                   let z = 0;
+                   const tiltX = ringIdx === 0 ? 0.44 : ringIdx === 1 ? 1.13 : 1.45;
+                   const tiltZ = ringIdx === 0 ? 0.17 : ringIdx === 1 ? 0.73 : -0.38;
+                   const cx = Math.cos(tiltX);
+                   const sx = Math.sin(tiltX);
+                   const y1 = y * cx - z * sx;
+                   const z1 = y * sx + z * cx;
+                   const cz = Math.cos(tiltZ);
+                   const sz = Math.sin(tiltZ);
+                   target.set(x * cz - y1 * sz, x * sz + y1 * cz, z1);
+                   const bright = 0.5 + 0.2 * Math.sin(angle * 3 + t);
+                   if (ringIdx === 0) {
+                     color.setRGB(0.49 * bright, 0.23 * bright, 0.93 * bright);
+                   } else if (ringIdx === 1) {
+                     color.setRGB(0.02 * bright, 0.71 * bright, 0.83 * bright);
+                   } else {
+                     color.setRGB(0.42 * bright, 0.30 * bright, 0.98 * bright);
+                   }
+                 
+                 } else if (i < nucleusCount + ringCount + electronTrailCount) {
+                   const ei = i - nucleusCount - ringCount;
+                   const ringIdx = Math.floor(ei / trailPerRing);
+                   const trailIdx = ei - ringIdx * trailPerRing;
+                   const trailFrac = trailIdx / trailPerRing;
+                   const orbitSpeed = (1.0 + ringIdx * 0.3) * (ringIdx === 1 ? -1 : 1);
+                   const electronAngle = t * orbitSpeed * 3.0;
+                   const trailOffset = trailFrac * (trailLen * 0.04);
+                   const angle = electronAngle - trailOffset;
+                   let x = Math.cos(angle) * radius;
+                   let y = Math.sin(angle) * radius;
+                   let z = 0;
+                   const tiltX = ringIdx === 0 ? 0.44 : ringIdx === 1 ? 1.13 : 1.45;
+                   const tiltZ = ringIdx === 0 ? 0.17 : ringIdx === 1 ? 0.73 : -0.38;
+                   const cx = Math.cos(tiltX);
+                   const sx = Math.sin(tiltX);
+                   const y1 = y * cx - z * sx;
+                   const z1 = y * sx + z * cx;
+                   const cz = Math.cos(tiltZ);
+                   const sz = Math.sin(tiltZ);
+                   target.set(x * cz - y1 * sz, x * sz + y1 * cz, z1);
+                   const fade = 1.0 - trailFrac;
+                   const fadeCurve = fade * fade;
+                   if (trailFrac < 0.02) {
+                     color.setRGB(1.0, 1.0, 1.0);
+                   } else if (ringIdx === 0) {
+                     color.setRGB(0.7 * fadeCurve, 0.4 * fadeCurve, 1.0 * fadeCurve);
+                   } else if (ringIdx === 1) {
+                     color.setRGB(0.1 * fadeCurve, 0.9 * fadeCurve, 1.0 * fadeCurve);
+                   } else {
+                     color.setRGB(0.6 * fadeCurve, 0.45 * fadeCurve, 1.0 * fadeCurve);
+                   }
+                 
+                 } else {
+                   const ai = i - nucleusCount - ringCount - electronTrailCount;
+                   const golden = 2.399963;
+                   const theta = Math.acos(1 - 2 * (ai + 0.5) / ambientCount);
+                   const phi = golden * ai + t * 0.05;
+                   const r = radius * 2.5;
+                   target.set(
+                     Math.sin(theta) * Math.cos(phi) * r,
+                     Math.sin(theta) * Math.sin(phi) * r,
+                     Math.cos(theta) * r
+                   );
+                   const mix = Math.sin(ai * 0.05 + t * 0.3) * 0.5 + 0.5;
+                   color.setRGB(
+                     (0.49 * (1 - mix) + 0.02 * mix) * 0.15,
+                     (0.23 * (1 - mix) + 0.71 * mix) * 0.15,
+                     (0.93 * (1 - mix) + 0.83 * mix) * 0.15
+                   );
+                 }
+                 
+                 if (i === 0) {
+                   setInfo("korFlow Atom", "Electrons with trails orbiting. Adjust Trail Length slider.");
+                 }
+                 
+                 
+                 // USER CODE INJECTION END
+
+                 // LERP & UPDATE
+                 positions[i].lerp(target, 0.1);
+                 dummy.position.copy(positions[i]);
+                 dummy.updateMatrix();
+                 instancedMesh.setMatrixAt(i, dummy.matrix);
+                 instancedMesh.setColorAt(i, color); // Fix: Use 'color' which user modifies
+            }
+            instancedMesh.instanceMatrix.needsUpdate = true;
+            instancedMesh.instanceColor.needsUpdate = true;
+
+            composer.render();
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+
+<script src="../donate-modal.js"></script>
+</body>
+</html>

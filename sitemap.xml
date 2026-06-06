@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://techbooks00001.netlify.app/</loc>
-    <lastmod>2025-08-12</lastmod>
-  </url>
-  <url>
-    <loc>https://techbooks00001.netlify.app/book</loc>
-    <lastmod>2025-08-12</lastmod>
-  </url>
-  <url>
-    <loc>https://techbooks00001.netlify.app/civil-subjects</loc>
-    <lastmod>2025-08-12</lastmod>
-  </url>
-  <url>
-    <loc>https://techbooks00001.netlify.app/mech_sub</loc>
-    <lastmod>2025-08-12</lastmod>
-  </url>
-  <url>
-    <loc>https://techbooks00001.netlify.app/electrical-subjects</loc>
-    <lastmod>2025-08-12</lastmod>
-  </url>
-  <url>
-    <loc>https://techbooks00001.netlify.app/cse_sub</loc>
-    <lastmod>2025-08-12</lastmod>
-  </url>
-  <url>
-    <loc>https://techbooks00001.netlify.app/metal.html</loc>
-    <lastmod>2025-08-12</lastmod>
-  </url>
+  <url><loc>https://btechbook.in/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://btechbook.in/index.html</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://btechbook.in/book.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://btechbook.in/aboutus.html</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/privacy.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+
+  <!-- Branch Pages -->
+  <url><loc>https://btechbook.in/mech_sub.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://btechbook.in/cse_sub.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://btechbook.in/civil-subjects.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/electrical-subjects.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/metal.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mme_sub.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/metrology.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+
+  <!-- Mechanical Subjects -->
+  <url><loc>https://btechbook.in/mech/thermodynamics.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/fluidmechanics.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/mechanics.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/manufacturingpractices.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/heatandmass.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/designofmachine.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/dynamicsofmachines.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/math1.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/math2.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/math3.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/mech/python.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+
+  <!-- CSE Subjects -->
+  <url><loc>https://btechbook.in/cse/datastructure.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/algorithm.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/operating-system.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/computernetworks.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/datamanagementsys.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/softwareeng.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/webtechnology.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/artificialinteligence.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/comp_org_arch.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://btechbook.in/cse/computaion.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>

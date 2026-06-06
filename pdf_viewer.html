@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <!-- ✅ CONTENT SECURITY POLICY (Malware Protection) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://forms.app https://pagead2.googlesyndication.com https://partner.googleadservices.com https://*.googlesyndication.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://forms.app https://*.googlesyndication.com https://*.google.com https://*.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://forms.app https://*.forms.app https://*.googlesyndication.com; frame-src 'self' https://forms.app https://*.forms.app https://*.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none';">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: #2b2b2b;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           LOADING SCREEN
+        ═══════════════════════════════════════════════════════════════ */
+        #loading {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #2b2b2b;
+            color: #fff;
+            z-index: 10000;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #loading-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           ERROR SCREEN
+        ═══════════════════════════════════════════════════════════════ */
+        #error {
+            display: none;
+            position: fixed;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            background: #2b2b2b;
+            color: #fff;
+            padding: 24px;
+            z-index: 10000;
+        }
+
+        .error-content {
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .error-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .error-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .error-message {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+            word-break: break-word;
+        }
+
+        .error-button {
+            padding: 12px 32px;
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PDF CONTAINER
+        ═══════════════════════════════════════════════════════════════ */
+        #pdf-container {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #pdf-canvas {
+            display: block;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           CONTROLS - Glass Morphism
+        ═══════════════════════════════════════════════════════════════ */
+        #controls {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        #controls.hidden {
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px);
+            pointer-events: none;
+        }
+
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0.95);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 4px;
+        }
+
+        #page-info {
+            font-size: 14px;
+            color: #fff;
+            font-weight: 500;
+            min-width: 80px;
+            text-align: center;
+            user-select: none;
+        }
+
+        #zoom-level {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        #fit-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        #fit-mode-toggle.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════════════════════ */
+        @media (max-width: 600px) {
+            #controls {
+                bottom: 20px;
+                padding: 10px 16px;
+                gap: 6px;
+            }
+
+            .control-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            #page-info {
+                font-size: 13px;
+                min-width: 70px;
+            }
+
+            #zoom-level {
+                font-size: 12px;
+                min-width: 40px;
+            }
+
+            #fit-mode-toggle {
+                top: 16px;
+                right: 16px;
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+        }
+    
+
+/* =================================
+   Premium Mega Footer
+==================================== */
+.site-footer {
+    background: #0f172a; /* Deep premium blue-gray */
+    color: #e2e8f0;
+    padding: 80px 20px 40px;
+    font-family: 'Open Sans', 'Inter', sans-serif;
+    margin-top: 100px;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+}
+.site-footer .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 50px;
+}
+.site-footer h3 {
+    font-size: 1.25rem;
+    margin-bottom: 25px;
+    color: #e0e7ff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 12px;
+}
+.site-footer h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 2px;
+}
+.site-footer p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #94a3b8;
+}
+.site-footer .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.site-footer .footer-list li {
+    margin-bottom: 16px;
+}
+.site-footer .footer-list a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.site-footer .footer-list a:hover {
+    color: #3b82f6;
+    transform: translateX(6px);
+}
+/* Dropdown Group */
+.dropdown-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+.dropdown-group label {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+.footer-select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    outline: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px top 50%;
+    background-size: 12px auto;
+}
+.footer-select:focus {
+    border-color: #3b82f6;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+.footer-select option {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+.site-footer .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 0.9rem;
+    color: #64748b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.footer-bottom a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-bottom a:hover {
+    color: #3b82f6;
+}
+
+@media (max-width: 768px) {
+    .site-footer { padding: 60px 20px 30px; margin-top: 60px; }
+    .site-footer .footer-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .footer-bottom { flex-direction: column; gap: 10px; }
+}
+
+</style>
+
+    <!-- ✅ SEO TITLE -->
+    <title>PDF Viewer - Engineering Notes & PDFs | BTechBook</title>
+
+    <!-- ✅ META DESCRIPTION -->
+    <meta name="description" content="Download free PDF Viewer - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.">
+
+    <!-- ✅ CANONICAL (VERY IMPORTANT) -->
+    <link rel="canonical" href="https://btechbook.in/pdf_viewer.html">
+
+    <!-- ✅ OPEN GRAPH (Sharing Boost) -->
+    <meta property="og:title" content="PDF Viewer - Engineering Notes & PDFs | BTechBook">
+    <meta property="og:description" content="Download free PDF Viewer - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://btechbook.in/pdf_viewer.html">
+
+    <!-- ✅ SCHEMA (Educational Material) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "BTechBook",
+      "url": "https://btechbook.in/",
+      "description": "Download free PDF Viewer - Engineering Notes & PDFs lecture notes, PDFs, and study materials for B.Tech and Diploma students. Prepare for exams easily with BTechBook.",
+      "educationalLevel": "Undergraduate",
+      "sameAs": [
+        "https://btechbook.in/"
+      ]
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZSPNESPG3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TZSPNESPG3');
+    </script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+<!-- Loading Screen -->
+<div id="loading">
+    <div class="spinner"></div>
+    <div id="loading-text">Loading PDF...</div>
+</div>
+
+<!-- Error Screen -->
+<div id="error">
+    <div class="error-content">
+        <div class="error-icon">⚠️</div>
+        <div class="error-title">Unable to Load PDF</div>
+        <div class="error-message" id="error-message"></div>
+        <button class="error-button" onclick="window.history.back()">Go Back</button>
+    </div>
+</div>
+
+<!-- PDF Container -->
+<div id="pdf-container">
+    <canvas id="pdf-canvas"></canvas>
+</div>
+
+<!-- Fit Mode Toggle -->
+<button id="fit-mode-toggle" class="hidden">Fit: Width</button>
+
+<!-- Control Bar -->
+<div id="controls" class="hidden">
+    <button class="control-btn" id="btn-prev" title="Previous Page">‹</button>
+    <div class="divider"></div>
+    <button class="control-btn" id="btn-zoom-out" title="Zoom Out">−</button>
+    <span id="zoom-level">100%</span>
+    <button class="control-btn" id="btn-zoom-in" title="Zoom In">+</button>
+    <div class="divider"></div>
+    <span id="page-info">1 / 1</span>
+    <div class="divider"></div>
+    <button class="control-btn" id="btn-next" title="Next Page">›</button>
+</div>
+
+<!-- ✅ FIX 2: ONLY ONE SCRIPT TAG - NO WORKER SCRIPT -->
+<script src="js/pdf.min.js"></script>
+
+<script>
+    // ═══════════════════════════════════════════════════════════════
+    // PERFECT PDF VIEWER - All Fixes Applied
+    // ═══════════════════════════════════════════════════════════════
+
+    // ─────────────────────────────────────────────────────────────
+    // CONTROLLED PIXEL RATIO (Prevents High-DPI Crashes)
+    // ─────────────────────────────────────────────────────────────
+    const devicePixelRatio = Math.min(window.devicePixelRatio || 2, 2);
+    console.log('✅ Device Pixel Ratio (controlled):', devicePixelRatio);
+
+    // ─────────────────────────────────────────────────────────────
+    // Global State
+    // ─────────────────────────────────────────────────────────────
+    let pdfDoc = null;
+    let currentPage = 1;
+    let currentScale = 1.0;
+    let fitMode = 'width';
+    let isRendering = false;
+    let controlsTimeout = null;
+
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas.getContext('2d', {
+        alpha: false,
+        desynchronized: true
+    });
+    const container = document.getElementById('pdf-container');
+
+    // ─────────────────────────────────────────────────────────────
+    // Initialize
+    // ─────────────────────────────────────────────────────────────
+    const urlParams = new URLSearchParams(window.location.search);
+    const pdfPath = urlParams.get('file');
+
+    if (!pdfPath) {
+        showError('No PDF file specified in URL');
+    } else {
+        initializePdfViewer(pdfPath);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // PDF INITIALIZATION
+    // ─────────────────────────────────────────────────────────────
+    async function initializePdfViewer(path) {
+        try {
+            // ✅ FIX 1: CORRECT WORKER PATH (Android Asset Path)
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'file:///android_asset/js/pdf.worker.min.js';
+            console.log('✅ PDF.js worker configured with Android asset path');
+
+            const loadingTask = pdfjsLib.getDocument(path);
+            pdfDoc = await loadingTask.promise;
+            console.log('✅ PDF loaded:', pdfDoc.numPages, 'pages');
+
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('controls').classList.remove('hidden');
+            document.getElementById('fit-mode-toggle').classList.remove('hidden');
+
+            await renderPage(1);
+            setupEventListeners();
+            resetControlsTimer();
+
+        } catch (error) {
+            console.error('❌ Failed to load PDF:', error);
+            showError('Failed to load PDF: ' + error.message);
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // AUTO-FIT CALCULATION
+    // ─────────────────────────────────────────────────────────────
+    async function calculateOptimalScale(page) {
+        const viewport = page.getViewport({ scale: 1.0 });
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        let scale;
+
+        switch (fitMode) {
+            case 'width':
+                scale = (containerWidth - 32) / viewport.width;
+                break;
+            case 'height':
+                scale = (containerHeight - 64) / viewport.height;
+                break;
+            case 'actual':
+                scale = 1.0;
+                break;
+            default:
+                scale = (containerWidth - 32) / viewport.width;
+        }
+
+        const minScale = 0.5;
+        const maxScale = 5.0;
+        scale = Math.max(minScale, Math.min(maxScale, scale));
+
+        return scale;
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ✅ FIX 3: MEMORY-SAFE RENDERING (Automatic Scale Reduction)
+    // ─────────────────────────────────────────────────────────────
+    async function renderPage(pageNum) {
+        if (isRendering || !pdfDoc) return;
+        isRendering = true;
+
+        try {
+            const page = await pdfDoc.getPage(pageNum);
+            currentScale = await calculateOptimalScale(page);
+
+            // ✅ MEMORY-SAFE CANVAS SIZE CALCULATION
+            const MAX_CANVAS_PIXELS = 16000000; // 16 million pixels = safe limit
+
+            let renderScale = currentScale * devicePixelRatio;
+            let viewport = page.getViewport({ scale: renderScale });
+
+            let pixelCount = viewport.width * viewport.height;
+
+            // ✅ If canvas would exceed safe memory, reduce scale automatically
+            if (pixelCount > MAX_CANVAS_PIXELS) {
+                const reductionFactor = Math.sqrt(MAX_CANVAS_PIXELS / pixelCount);
+                renderScale = renderScale * reductionFactor;
+                viewport = page.getViewport({ scale: renderScale });
+                pixelCount = viewport.width * viewport.height;
+                console.warn('⚠️ Canvas too large, auto-reduced scale to:', renderScale.toFixed(2));
+            }
+
+            console.log('📐 Rendering:', {
+                page: pageNum,
+                scale: currentScale.toFixed(2),
+                renderScale: renderScale.toFixed(2),
+                width: Math.round(viewport.width),
+                height: Math.round(viewport.height),
+                pixels: (pixelCount / 1000000).toFixed(1) + 'M',
+                memory: Math.round((pixelCount * 4) / 1024 / 1024) + 'MB'
+            });
+
+            // Set canvas size (high resolution)
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Set display size (CSS - normal size)
+            canvas.style.width = (viewport.width / devicePixelRatio) + 'px';
+            canvas.style.height = (viewport.height / devicePixelRatio) + 'px';
+
+            // Render PDF page
+            await page.render({
+                canvasContext: ctx,
+                viewport: viewport,
+                intent: 'display'
+            }).promise;
+
+            currentPage = pageNum;
+            updateUI();
+            console.log('✅ Page rendered successfully');
+
+        } catch (error) {
+            console.error('❌ Render failed:', error);
+            showError('Failed to render page: ' + error.message);
+        } finally {
+            isRendering = false;
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZOOM FUNCTIONS
+    // ─────────────────────────────────────────────────────────────
+    function zoom(direction) {
+        if (!pdfDoc || isRendering) return;
+
+        const scrollLeft = container.scrollLeft;
+        const scrollTop = container.scrollTop;
+        const centerX = scrollLeft + container.clientWidth / 2;
+        const centerY = scrollTop + container.clientHeight / 2;
+
+        const zoomStep = 0.1;
+        const oldScale = currentScale;
+
+        if (direction === 'in') {
+            currentScale = Math.min(currentScale + zoomStep, 5.0);
+        } else {
+            currentScale = Math.max(currentScale - zoomStep, 0.5);
+        }
+
+        fitMode = 'actual';
+
+        rerenderCurrentPage().then(() => {
+            const scaleFactor = currentScale / oldScale;
+            container.scrollLeft = centerX * scaleFactor - container.clientWidth / 2;
+            container.scrollTop = centerY * scaleFactor - container.clientHeight / 2;
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ✅ RERENDER WITH SAME MEMORY-SAFE LOGIC
+    // ─────────────────────────────────────────────────────────────
+    async function rerenderCurrentPage() {
+        if (!pdfDoc || isRendering) return;
+        isRendering = true;
+
+        try {
+            const page = await pdfDoc.getPage(currentPage);
+
+            // ✅ MEMORY-SAFE CANVAS SIZE CALCULATION
+            const MAX_CANVAS_PIXELS = 16000000;
+
+            let renderScale = currentScale * devicePixelRatio;
+            let viewport = page.getViewport({ scale: renderScale });
+
+            let pixelCount = viewport.width * viewport.height;
+
+            // ✅ Auto-reduce if too large
+            if (pixelCount > MAX_CANVAS_PIXELS) {
+                const reductionFactor = Math.sqrt(MAX_CANVAS_PIXELS / pixelCount);
+                renderScale = renderScale * reductionFactor;
+                viewport = page.getViewport({ scale: renderScale });
+                console.warn('⚠️ Zoom too high, auto-reduced to safe level');
+            }
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            canvas.style.width = (viewport.width / devicePixelRatio) + 'px';
+            canvas.style.height = (viewport.height / devicePixelRatio) + 'px';
+
+            await page.render({
+                canvasContext: ctx,
+                viewport: viewport,
+                intent: 'display'
+            }).promise;
+
+            updateUI();
+
+        } catch (error) {
+            console.error('❌ Rerender failed:', error);
+            alert('Zoom level too high for this PDF. Reducing...');
+            currentScale = Math.max(currentScale - 0.3, 0.5);
+            await rerenderCurrentPage();
+        } finally {
+            isRendering = false;
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // FIT MODE
+    // ─────────────────────────────────────────────────────────────
+    function cycleFitMode() {
+        const modes = ['width', 'height', 'actual'];
+        const currentIndex = modes.indexOf(fitMode);
+        fitMode = modes[(currentIndex + 1) % modes.length];
+
+        const modeNames = { width: 'Width', height: 'Height', actual: '100%' };
+        document.getElementById('fit-mode-toggle').textContent = 'Fit: ' + modeNames[fitMode];
+
+        renderPage(currentPage);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // PAGE NAVIGATION
+    // ─────────────────────────────────────────────────────────────
+    function goToPage(pageNum) {
+        if (!pdfDoc || isRendering) return;
+
+        const totalPages = pdfDoc.numPages;
+        if (pageNum < 1 || pageNum > totalPages) return;
+
+        container.scrollTop = 0;
+        container.scrollLeft = 0;
+
+        renderPage(pageNum);
+    }
+
+    function nextPage() {
+        if (currentPage < pdfDoc.numPages) {
+            goToPage(currentPage + 1);
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            goToPage(currentPage - 1);
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // UI UPDATE
+    // ─────────────────────────────────────────────────────────────
+    function updateUI() {
+        if (!pdfDoc) return;
+
+        document.getElementById('page-info').textContent = `${currentPage} / ${pdfDoc.numPages}`;
+
+        const zoomPercent = Math.round(currentScale * 100);
+        document.getElementById('zoom-level').textContent = zoomPercent + '%';
+
+        document.getElementById('btn-prev').disabled = (currentPage === 1);
+        document.getElementById('btn-next').disabled = (currentPage === pdfDoc.numPages);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CONTROLS AUTO-HIDE
+    // ─────────────────────────────────────────────────────────────
+    function hideControls() {
+        document.getElementById('controls').classList.add('hidden');
+        document.getElementById('fit-mode-toggle').classList.add('hidden');
+    }
+
+    function showControls() {
+        document.getElementById('controls').classList.remove('hidden');
+        document.getElementById('fit-mode-toggle').classList.remove('hidden');
+        resetControlsTimer();
+    }
+
+    function resetControlsTimer() {
+        clearTimeout(controlsTimeout);
+        controlsTimeout = setTimeout(hideControls, 3000);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // EVENT LISTENERS
+    // ─────────────────────────────────────────────────────────────
+    function setupEventListeners() {
+        document.getElementById('btn-zoom-in').addEventListener('click', () => zoom('in'));
+        document.getElementById('btn-zoom-out').addEventListener('click', () => zoom('out'));
+        document.getElementById('btn-next').addEventListener('click', nextPage);
+        document.getElementById('btn-prev').addEventListener('click', prevPage);
+        document.getElementById('fit-mode-toggle').addEventListener('click', cycleFitMode);
+
+        container.addEventListener('click', (e) => {
+            if (e.target === canvas) {
+                if (document.getElementById('controls').classList.contains('hidden')) {
+                    showControls();
+                } else {
+                    resetControlsTimer();
+                }
+            }
+        });
+
+        // Double tap to zoom
+        let lastTap = 0;
+        container.addEventListener('touchend', (e) => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            if (tapLength < 300 && tapLength > 0) {
+                if (currentScale === 1.0) {
+                    currentScale = 2.0;
+                } else {
+                    currentScale = 1.0;
+                }
+                fitMode = 'actual';
+                rerenderCurrentPage();
+            }
+            lastTap = currentTime;
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    prevPage();
+                    break;
+                case 'ArrowRight':
+                    nextPage();
+                    break;
+                case '+':
+                case '=':
+                    zoom('in');
+                    break;
+                case '-':
+                    zoom('out');
+                    break;
+            }
+        });
+
+        // Window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (fitMode !== 'actual') {
+                    renderPage(currentPage);
+                }
+            }, 300);
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ERROR HANDLING
+    // ─────────────────────────────────────────────────────────────
+    function showError(message) {
+        console.error('💥 Error:', message);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error').style.display = 'flex';
+        document.getElementById('error-message').textContent = message;
+    }
+</script>
+
+    
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Column 1: About -->
+            <div class="footer-col">
+                <h3>BTechBook</h3>
+                <p>Your one-stop destination for engineering lecture notes, PDF books, and comprehensive study materials across all major branches. Built for B.Tech & Diploma students.</p>
+                <div style="margin-top: 20px;">
+                    <p><strong>Email:</strong> <a href="mailto:asnstudios.app@gmail.com" style="color:#60a5fa; text-decoration:none;">asnstudios.app@gmail.com</a></p>
+                </div>
+            </div>
+
+            <!-- Column 2: Branch Links -->
+            <div class="footer-col">
+                <h3>Engineering Branches</h3>
+                <ul class="footer-list">
+                    <li><a href="index.html">🏠 Home Page</a></li>
+                    <li><a href="mech_sub.html">⚙️ Mechanical Engineering</a></li>
+                    <li><a href="cse_sub.html">💻 Computer Science</a></li>
+                    <li><a href="civil-subjects.html">🏗️ Civil Engineering</a></li>
+                    <li><a href="electrical-subjects.html">🔌 Electrical Engineering</a></li>
+                    <li><a href="metal.html">⛏️ Metallurgy</a></li>
+                    <li><a href="book.html">📚 Books Library</a></li>
+                    <li><a href="donate.html" style="color:#f59e0b; font-weight:600;">?? Support / Donate</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Subject Quick Jump -->
+            <div class="footer-col">
+                <h3>Jump to Subjects</h3>
+                
+                <div class="dropdown-group">
+                    <label>Mechanical Subjects</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='' + this.value;">
+                        <option value="">-- Choose Subject --</option>
+                        <option value="mech/thermodynamics.html">Thermodynamics</option>
+                        <option value="mech/fluidmechanics.html">Fluid Mechanics</option>
+                        <option value="mech/mechanics.html">Engg. Mechanics</option>
+                        <option value="mech/manufacturingpractices.html">Manufacturing Tech</option>
+                        <option value="mech/heatandmass.html">Heat and Mass Transfer</option>
+                        <option value="mech_sub.html">View All Mechanical...</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-group">
+                    <label>Computer Science Subjects</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='' + this.value;">
+                        <option value="">-- Choose Subject --</option>
+                        <option value="cse/datastructure.html">Data Structures</option>
+                        <option value="cse/algorithm.html">Algorithms</option>
+                        <option value="cse/operating-system.html">Operating System</option>
+                        <option value="cse/computernetworks.html">Computer Networks</option>
+                        <option value="cse/datamanagementsys.html">DBMS</option>
+                        <option value="cse_sub.html">View All CSE...</option>
+                    </select>
+                </div>
+                
+                <div class="dropdown-group">
+                    <label>Other Branches</label>
+                    <select class="footer-select" onchange="if(this.value) window.location.href='' + this.value;">
+                        <option value="">-- View Branches --</option>
+                        <option value="civil-subjects.html">Civil Engineering</option>
+                        <option value="electrical-subjects.html">Electrical Engineering</option>
+                        <option value="metal.html">Metallurgy</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> BTechBook. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+<script src="donate-modal.js"></script>
+</body>
+</html>
